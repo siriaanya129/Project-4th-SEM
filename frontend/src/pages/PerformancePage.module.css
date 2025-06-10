@@ -1,0 +1,41 @@
+/* In frontend/src/pages/PerformancePage.module.css */
+.pageWrapper {
+  padding: 100px 2rem 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.header h2 {
+  font-size: 2.2rem;
+  color: var(--heading-color);
+}
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.historyCard {
+  background-color: var(--white-color);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  border-left: 5px solid var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.historyCard:hover {
+  transform: translateX(5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+.historyCard h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--heading-color);
+}
+.historyCard p {
+  margin: 0;
+  color: var(--text-color);
+  font-weight: 500;
+}

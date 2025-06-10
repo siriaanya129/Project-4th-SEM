@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Test Interface</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #333; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px; }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #ccc; cursor: not-allowed;}
+        select { padding: 10px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #ccc; }
+        .question-block { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9; }
+        .question-text { font-weight: bold; margin-bottom: 10px; }
+        .options label { display: block; margin-bottom: 8px; cursor: pointer; }
+        .options input[type="radio"] { margin-right: 8px; }
+        .results { margin-top: 20px; padding: 15px; border: 1px solid #ccc; background-color: #e9ffe9; }
+        .error { color: red; font-weight: bold; }
+        .status { margin-top: 10px; font-style: italic;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Test Interface</h1>
+
+        <div id="selection-area">
+            <h2>Select Quiz Type</h2>
+            <button id="btn-unit-quiz-mode">Unit-wise Quiz</button>
+            <button id="btn-grand-quiz-mode">Grand Quiz</button>
+        </div>
+
+        <div id="unit-selection-area" style="display:none;">
+            <h2>Select Unit</h2>
+            <select id="unit-selector">
+                <option value="">-- Select a Unit --</option>
+            </select>
+            <button id="btn-fetch-unit-quiz">Start Unit Quiz</button>
+        </div>
+        
+        <div id="quiz-area" style="display:none;">
+            <h2 id="quiz-title">Quiz</h2>
+            <div id="questions-container"></div>
+            <button id="btn-submit-quiz">Submit Quiz</button>
+        </div>
+
+        <div id="results-area" style="display:none;">
+            <h2>Quiz Results</h2>
+            <div id="score-display"></div>
+            <div id="detailed-results-display"></div>
+            <button id="btn-back-to-selection">Back to Quiz Selection</button>
+        </div>
+        <div id="status-area" class="status"></div>
+    </div>
+
+    <script>
+        const API_BASE_URL = "http://localhost:8000/api/v1"; // Adjust if your backend runs elsewhere
+        let currentQuizQuestions = [];
+        let currentQuizType = ''; // 'unit' or 'grand'
+
+        const selectionArea = document.getElementById('selection-area');
+        const unitSelectionArea = document.getElementById('unit-selection-area');
+        const quizArea = document.getElementById('quiz-area');
+        const resultsArea = document.getElementById('results-area');
+        const unitSelector = document.getElementById('unit-selector');
+        const questionsContainer = document.getElementById('questions-container');
+        const scoreDisplay = document.getElementById('score-display');
+        const detailedResultsDisplay = document.getElementById('detailed-results-display');
+        const quizTitle = document.getElementById('quiz-title');
+        const statusArea = document.getElementById('status-area');
+
+
+        async function fetchUnits() {
+            try {
+                statusArea.textContent = "Fetching units...";
+                const response = await fetch(`${API_BASE_URL}/units`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const units = await response.json();
+                unitSelector.innerHTML = '<option value="">-- Select a Unit --</option>'; // Clear previous
+                units.forEach(unit => {
+                    const option = document.createElement('option');
+                    option.value = unit;
+                    option.textContent = unit;
+                    unitSelector.appendChild(option);
+                });
+                statusArea.textContent = "Units loaded.";
+            } catch (error) {
+                console.error("Error fetching units:", error);
+                statusArea.innerHTML = `<p class="error">Error fetching units: ${error.message}</p>`;
+            }
+        }
+
+        async function fetchQuiz(type, unitName = null) {
+            let url = "";
+            if (type === 'unit' && unitName) {
+                url = `${API_BASE_URL}/quiz/unit/${encodeURIComponent(unitName)}`;
+                quizTitle.textContent = `Unit Quiz: ${unitName}`;
+            } else if (type === 'grand') {
+                url = `${API_BASE_URL}/quiz/grand`;
+                quizTitle.textContent = `Grand Quiz`;
+            } else {
+                statusArea.innerHTML = `<p class="error">Invalid quiz type or unit.</p>`;
+                return;
+            }
+            currentQuizType = type;
+
+            try {
+                statusArea.textContent = "Fetching quiz questions...";
+                const response = await fetch(url);
+                if (!response.ok) {
+                     const errorData = await response.json();
+                     throw new Error(`HTTP error! status: ${response.status} - ${errorData.detail || 'Failed to fetch quiz'}`);
+                }
+                currentQuizQuestions = await response.json();
+                displayQuestions();
+                selectionArea.style.display = 'none';
+                unitSelectionArea.style.display = 'none';
+                quizArea.style.display = 'block';
+                resultsArea.style.display = 'none';
+                statusArea.textContent = "Quiz loaded. Answer the questions.";
+            } catch (error) {
+                console.error(`Error fetching ${type} quiz:`, error);
+                statusArea.innerHTML = `<p class="error">Error fetching ${type} quiz: ${error.message}</p>`;
+            }
+        }
+
+        function displayQuestions() {
+            questionsContainer.innerHTML = ''; // Clear previous questions
+            currentQuizQuestions.forEach((q, index) => {
+                const questionBlock = document.createElement('div');
+                questionBlock.className = 'question-block';
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.innerHTML = `Q${index + 1} (Marks: ${q.marks || 1}): ${q.question_text}`;
+                questionBlock.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach((optionText, optionIndex) => {
+                    const label = document.createElement('label');
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question-${index}`;
+                    radio.value = optionIndex;
+                    label.appendChild(radio);
+                    label.appendChild(document.createTextNode(optionText));
+                    optionsDiv.appendChild(label);
+                });
+                questionBlock.appendChild(optionsDiv);
+                questionsContainer.appendChild(questionBlock);
+            });
+        }
+
+        async function submitQuiz() {
+            const studentAnswers = [];
+            currentQuizQuestions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
+                studentAnswers.push(selectedOption ? parseInt(selectedOption.value) : null);
+            });
+
+            const submitUrl = currentQuizType === 'unit' ? `${API_BASE_URL}/quiz/submit/unit` : `${API_BASE_URL}/quiz/submit/grand`;
+            
+            try {
+                statusArea.textContent = "Submitting answers...";
+                const response = await fetch(submitUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        quiz_questions: currentQuizQuestions, // Send back the questions for scoring context
+                        student_answers: studentAnswers 
+                    })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`HTTP error! status: ${response.status} - ${errorData.detail || 'Failed to submit quiz'}`);
+                }
+                const results = await response.json();
+                displayResults(results);
+                quizArea.style.display = 'none';
+                resultsArea.style.display = 'block';
+                statusArea.textContent = "Quiz submitted. Results below.";
+            } catch (error) {
+                console.error("Error submitting quiz:", error);
+                statusArea.innerHTML = `<p class="error">Error submitting quiz: ${error.message}</p>`;
+            }
+        }
+
+        function displayResults(results) {
+            scoreDisplay.innerHTML = `
+                <h3>Your Score: ${results.total_score} / ${results.max_score}</h3>
+                <p>Correct Answers: ${results.correct_answers_count} out of ${results.total_questions}</p>
+            `;
+            let detailsHtml = "<h4>Detailed Results:</h4>";
+            results.detailed_results.forEach((res, index) => {
+                detailsHtml += `<div class="question-block ${res.is_correct ? 'correct' : 'incorrect'}">
+                                  <p><b>Q${index + 1}:</b> ${res.question_text}</p>
+                                  <p>Your answer: ${res.student_answer_index !== null ? res.options[res.student_answer_index] : 'Not Answered'} 
+                                     (${res.is_correct ? 'Correct' : 'Incorrect'}) - Marks: ${res.marks_obtained}/${res.marks_possible}</p>
+                                  ${!res.is_correct ? `<p>Correct answer: ${res.options[res.correct_answer_index]}</p>` : ''}
+                                  <p><em>Explanation: ${currentQuizQuestions[index].explanation || 'No explanation available.'}</em></p>
+                               </div>`;
+            });
+            detailedResultsDisplay.innerHTML = detailsHtml;
+        }
+
+        document.getElementById('btn-unit-quiz-mode').addEventListener('click', () => {
+            selectionArea.style.display = 'none';
+            unitSelectionArea.style.display = 'block';
+            fetchUnits(); // Populate unit dropdown
+        });
+
+        document.getElementById('btn-grand-quiz-mode').addEventListener('click', () => {
+            fetchQuiz('grand');
+        });
+
+        document.getElementById('btn-fetch-unit-quiz').addEventListener('click', () => {
+            const selectedUnit = unitSelector.value;
+            if (selectedUnit) {
+                fetchQuiz('unit', selectedUnit);
+            } else {
+                statusArea.innerHTML = `<p class="error">Please select a unit.</p>`;
+            }
+        });
+        
+        document.getElementById('btn-submit-quiz').addEventListener('click', submitQuiz);
+
+        document.getElementById('btn-back-to-selection').addEventListener('click', () => {
+            resultsArea.style.display = 'none';
+            selectionArea.style.display = 'block';
+            statusArea.textContent = "";
+        });
+
+    </script>
+</body>
+</html>

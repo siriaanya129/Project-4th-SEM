@@ -1,0 +1,91 @@
+/* In frontend/src/pages/QuizSelectionPage.module.css */
+.pageWrapper {
+  padding: 100px 2rem 4rem 2rem;
+  max-width: 900px; /* A slightly narrower container for a vertical list */
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.header h2 {
+  font-size: 2.2rem;
+  color: var(--heading-color);
+  margin: 0 0 0.5rem 0;
+}
+.header p {
+  font-size: 1.1rem;
+}
+
+/* New container for the list */
+.quizListContainer {
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  gap: 1.25rem; /* Space between cards */
+}
+
+.quizCard {
+  background-color: var(--white-color);
+  padding: 1.5rem 2.5rem; /* More horizontal padding */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+.quizCard:hover {
+  transform: translateY(-3px) scale(1.01); /* Lift and slightly grow */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary-color);
+}
+.quizCard span {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 500;
+  display: block;
+}
+.quizCard h3 {
+  font-size: 1.5rem; /* Bigger font for the unit name */
+  color: var(--heading-color);
+  margin: 0.25rem 0 0 0;
+}
+
+.grandQuiz {
+  margin-top: 1rem; /* Add some space above the Grand Quiz card */
+  border: 1px solid var(--border-color); /* Normal border */
+  background: linear-gradient(135deg, #f8f9fa, var(--white-color));
+}
+.grandQuiz:hover {
+    border-color: var(--primary-color);
+}
+.grandQuiz h3 {
+    color: var(--primary-color);
+}
+
+.locked {
+  background: #f8f9fa;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+.locked:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-color: var(--border-color);
+}
+.lockReason {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+.noQuizzesMessage {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    background-color: #f8f9fa;
+    border-radius: 12px;
+}

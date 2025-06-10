@@ -1,0 +1,121 @@
+/* In frontend/src/pages/LandingPage.module.css */
+
+.pageWrapper {
+  padding-top: 70px;
+  min-height: calc(100vh - 70px);
+  transition: background 0.5s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* State: BEFORE LOGIN */
+.loggedOut {
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center; /* Vertically center content */
+}
+
+/* State: AFTER LOGIN */
+.loggedIn {
+  background: linear-gradient(180deg, var(--primary-color) 40%, var(--background-color) 40%);
+  padding: 4rem 2rem; /* Add horizontal padding back */
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Arrange items vertically */
+  min-height: calc(100vh - 70px); /* Ensure it fills the screen height below the navbar */
+}
+
+.heroSection {
+  width: 100%;
+  color: var(--white-color);
+  padding: 2rem;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heroContent h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* --- LOGGED-OUT STATE STYLES --- */
+.heroSubtitle {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  max-width: 650px;
+  margin: 1.5rem auto 2.5rem auto;
+}
+
+.heroButton {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.heroButton:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-3px);
+}
+
+
+/* --- LOGGED-IN STATE STYLES (THE FIX) --- */
+.subjectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  /* This part is now in the .contentSection of SubjectPage */
+}
+
+.subjectCard {
+  /* THIS IS THE FIX: A solid background instead of transparent */
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color); /* A subtle border */
+  color: var(--heading-color); /* Darker text for contrast */
+  padding: 3rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Soft shadow */
+  cursor: pointer;
+}
+
+.subjectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.subjectCard h4 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.subjectCard.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #e9ecef; /* A slightly darker disabled color */
+  border-color: var(--border-color);
+}
+.subjectCard.disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.subjectCard span {
+  font-size: 0.9rem;
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}

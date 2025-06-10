@@ -1,0 +1,69 @@
+/* In frontend/src/pages/SubjectPage.module.css */
+.pageWrapper {
+  padding-top: 70px;
+}
+.heroSection {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 60px 2rem;
+  text-align: center;
+}
+.heroContent h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.heroContent p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+.contentSection {
+  padding: 4rem 2rem;
+}
+.optionsGrid {
+  display: grid;
+  /* --- START OF EDIT --- */
+  grid-template-columns: repeat(4, 1fr); /* Changed to explicitly create 4 columns */
+  gap: 1.5rem; /* Reduced gap to provide more space for cards */
+  max-width: 1400px; /* Increased max-width to prevent crowding */
+  /* --- END OF EDIT --- */
+  margin: 0 auto;
+}
+.optionCard {
+  background-color: var(--white-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+.optionCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+.optionCard h3 {
+  font-size: 1.5rem;
+  color: var(--heading-color);
+  margin: 0 0 0.75rem 0;
+}
+.optionCard p {
+  line-height: 1.6;
+  margin: 0;
+}
+.optionCard.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.optionCard.disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.optionCard.disabled span {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    margin-top: 1rem;
+}

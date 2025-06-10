@@ -1,0 +1,46 @@
+/* In frontend/src/pages/StudyMaterialsPage.module.css */
+.pageWrapper {
+  padding: 100px 2rem 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.header h2 {
+  font-size: 2.2rem;
+  color: var(--heading-color);
+  margin: 0 0 0.5rem 0;
+}
+.header p {
+  font-size: 1.1rem;
+}
+.materialsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.materialItem {
+  display: block;
+  background-color: var(--white-color);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+.materialItem:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+.materialItem h3 {
+  margin: 0 0 0.25rem 0;
+  color: var(--heading-color);
+}
+.materialItem span {
+  color: var(--primary-color);
+  font-weight: 500;
+}

@@ -1,0 +1,110 @@
+/* In frontend/src/pages/DeepAnalysisPage.module.css */
+
+.pageWrapper {
+  padding: 100px 2rem 4rem 2rem;
+  max-width: 1400px; /* Wider layout for a dashboard */
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.filters button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--white-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filters button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.filters button.active {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(105, 108, 255, 0.4);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.section {
+  background-color: var(--white-color);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+}
+
+.section h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--heading-color);
+    font-size: 1.5rem;
+}
+
+.pathwaySection {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 1rem;
+}
+
+.pathwayButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 1rem 3rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pathwayButton:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+}
+
+.pathwayResult {
+    margin-top: 2rem;
+    text-align: left; /* Reset text alignment for the component */
+}
+
+.categoryText {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0;
+  color: #2c3e50;
+}

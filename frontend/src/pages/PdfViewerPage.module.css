@@ -1,0 +1,50 @@
+/* In frontend/src/pages/PdfViewerPage.module.css */
+.pageWrapper {
+  padding: 80px 2rem 2rem 2rem; /* Add padding for the fixed navbar */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+}
+
+.viewerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.viewerHeader h2 {
+  margin: 0;
+  color: var(--heading-color);
+}
+
+.downloadButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.downloadButton:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.pdfContainer {
+  flex-grow: 1; /* Make the container take up all available vertical space */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden; /* Hide anything that spills out */
+}
+
+.pdfContainer embed {
+  /* The height and width are set to 100% to fill the container */
+  height: 100%;
+  width: 100%;
+}

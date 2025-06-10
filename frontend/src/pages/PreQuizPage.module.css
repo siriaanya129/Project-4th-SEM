@@ -1,0 +1,78 @@
+/* In frontend/src/pages/PreQuizPage.module.css */
+.pageWrapper {
+  padding: 100px 2rem;
+  background-color: var(--background-color);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.contentCard {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--white-color);
+  padding: 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+}
+
+.contentCard h1 {
+  font-size: 2.5rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin: 0.5rem 0 2rem 0;
+}
+
+.topicsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.topicsList li {
+  background-color: #e7e7ff;
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.instructions {
+  background-color: #f8f9fa;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.instructions p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.startButton {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 1rem 3rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.startButton:hover {
+  background-color: var(--primary-color-dark);
+  transform: translateY(-3px);
+}

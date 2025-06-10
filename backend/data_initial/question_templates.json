@@ -1,0 +1,2453 @@
+[
+  {
+    "id": "STAT_U3_T2_S1_M_LR_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Covariance",
+    "subtopic_name": "Covariance Interpretation",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "If Cov(X,Y) = {covariance_value}, which statement is TRUE?",
+    "options_template": [
+      "X and Y are independent",
+      "X and Y are uncorrelated",
+      "X and Y have no relationship",
+      "X and Y have no linear relationship"
+    ],
+    "answer_logic": {
+      "type": "fixed_choice_conditional",
+      "condition_var": "covariance_value",
+      "condition_val": 0,
+      "correct_option_index_if_true": 1,
+      "correct_option_index_if_false": 3 
+    },
+    "variable_generators": {
+      "covariance_value": {"type": "random_choice", "choices": [0, 0.5, -0.5]}
+    },
+    "explanation_template": "If Cov(X,Y) = 0, X and Y are uncorrelated. If Cov(X,Y) is non-zero, it indicates a linear relationship. Uncorrelation does not necessarily imply independence unless variables are normally distributed."
+  },
+  {
+    "id": "STAT_U1_T5_S1_M_D_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Percentiles and Box Plots",
+    "subtopic_name": "Interquartile Range (IQR)",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "The IQR (Interquartile Range) is resistant to outliers because it:",
+    "options_template": [
+      "Uses all values in the dataset",
+      "Only considers the middle 50% of values",
+      "Is always positive",
+      "Equals the mean minus the median"
+    ],
+    "answer_logic": {
+      "type": "fixed_choice",
+      "correct_option_index": 1
+    },
+    "variable_generators": {},
+    "explanation_template": "The IQR is calculated as Q3 - Q1, representing the spread of the middle 50% of the data, making it robust to extreme values."
+  },
+  {
+    "id": "STAT_U5_T1_S2_E_D_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Hypothesis Concepts",
+    "subtopic_name": "Null Hypothesis Formulation",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "A data scientist claims that a new algorithm {claim_description}. The null hypothesis (H₀) would be:",
+    "options_template": [
+      "The new algorithm {positive_outcome_description}",
+      "The new algorithm {negative_outcome_description}",
+      "The new algorithm {no_change_description}",
+      "The new algorithm is better than the old one"
+    ],
+    "answer_logic": {
+      "type": "fixed_choice",
+      "correct_option_index": 2
+    },
+    "variable_generators": {
+        "claim_type_idx": {"type": "random_int_range", "min": 0, "max": 1},
+        "claim_options": [
+            {"claim": "reduces processing time", "positive": "reduces processing time", "negative": "increases processing time", "no_change": "does not change processing time"},
+            {"claim": "improves prediction accuracy", "positive": "improves prediction accuracy", "negative": "worsens prediction accuracy", "no_change": "does not change prediction accuracy"}
+        ],
+        "claim_description": {"type": "lookup_from_options", "source_var": "claim_type_idx", "options_list_var": "claim_options", "lookup_key": "claim"},
+        "positive_outcome_description": {"type": "lookup_from_options", "source_var": "claim_type_idx", "options_list_var": "claim_options", "lookup_key": "positive"},
+        "negative_outcome_description": {"type": "lookup_from_options", "source_var": "claim_type_idx", "options_list_var": "claim_options", "lookup_key": "negative"},
+        "no_change_description": {"type": "lookup_from_options", "source_var": "claim_type_idx", "options_list_var": "claim_options", "lookup_key": "no_change"}
+    },
+    "explanation_template": "The null hypothesis (H₀) states there is no effect or no change from the status quo. If the claim is that the algorithm {claim_description}, H₀ posits it {no_change_description}."
+  },
+  {
+    "id": "STAT_U2_T2_S2_M_D_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sample Statistics",
+    "subtopic_name": "Standard Error of the Mean",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "If a population has a variance of {variance}, what is the standard error of the mean for a sample size of {sample_size}?",
+    "options_template": [
+      "{option_correct}",
+      "{option_distractor1}",
+      "{option_distractor2}",
+      "{option_distractor3}"
+    ],
+    "answer_logic": {
+      "type": "calculate_standard_error_mean",
+      "params": ["variance", "sample_size"]
+    },
+    "variable_generators": {
+      "variance_base": {"type": "random_int_range", "min": 3, "max": 15},
+      "variance": {"type": "square_value", "source_var": "variance_base"},
+      "sample_size_base": {"type": "random_int_range", "min": 2, "max": 10},
+      "sample_size": {"type": "square_value", "source_var": "sample_size_base"}
+    },
+    "explanation_template": "The standard error of the mean is calculated as sqrt(variance / sample_size). For variance = {variance} and sample size = {sample_size}, SE = sqrt({variance}/{sample_size}) = {correct_ans}."
+  },
+  {
+    "id": "STAT_U3_T6_S1_M_D_001", 
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Central Limit Theorem",
+    "subtopic_name": "Properties of Sample Mean Distribution",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "According to the Central Limit Theorem, as sample size increases, the sampling distribution of the sample mean:",
+    "options_template": [
+      "Approximates a normal distribution",
+      "Becomes more skewed",
+      "Equals the population distribution",
+      "Has increasing variance"
+    ],
+    "answer_logic": {
+      "type": "fixed_choice",
+      "correct_option_index": 0
+    },
+    "variable_generators": {},
+    "explanation_template": "The Central Limit Theorem states that for a sufficiently large sample size, the sampling distribution of the sample mean will be approximately normally distributed, regardless of the population's distribution."
+  },
+  {
+    "id": "STAT_U3_T2_S2_M_A_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Covariance",
+    "subtopic_name": "Calculating Covariance from Variances and Correlation",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "Two random variables X and Y have variances of {var_x} and {var_y} respectively, with a correlation coefficient of {corr_coeff}. What is their covariance?",
+    "options_template": [
+      "{option_correct}",
+      "{option_distractor1}",
+      "{option_distractor2}",
+      "{option_distractor3}"
+    ],
+    "answer_logic": {
+      "type": "calculate_covariance_from_corr",
+      "params": ["var_x", "var_y", "corr_coeff"]
+    },
+    "variable_generators": {
+      "std_dev_x_base": {"type": "random_int_range", "min": 2, "max": 5},
+      "var_x": {"type": "square_value", "source_var": "std_dev_x_base"},
+      "std_dev_y_base": {"type": "random_int_range", "min": 2, "max": 6, "ensure_different_from": "std_dev_x_base"},
+      "var_y": {"type": "square_value", "source_var": "std_dev_y_base"},
+      "corr_coeff": {"type": "random_float_range", "min": 0.3, "max": 0.8, "decimals": 1}
+    },
+    "explanation_template": "Cov(X,Y) = Correlation(X,Y) * sqrt(Var(X)) * sqrt(Var(Y)). So, Cov(X,Y) = {corr_coeff} * sqrt({var_x}) * sqrt({var_y}) = {corr_coeff} * {std_dev_x_base} * {std_dev_y_base} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U1_T3_S2_E_D_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Central Tendency",
+    "subtopic_name": "Median Definition",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "Which measure divides a dataset into two equal halves?",
+    "options_template": [ "Mean", "Median", "Mode", "Range" ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 1 },
+    "variable_generators": {},
+    "explanation_template": "The median is the middle value of a dataset when it is sorted, dividing it into two equal halves."
+  },
+  {
+    "id": "STAT_U1_T5_S1_E_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Percentiles and Box Plots",
+    "subtopic_name": "Calculating IQR",
+    "difficulty_level": "easy",
+    "difficulty_type": "aptitude",
+    "question_template": "In a dataset where Q1 = {q1_val} and Q3 = {q3_val}, what is the interquartile range (IQR)?",
+    "options_template": [ "{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}" ],
+    "answer_logic": { "type": "calculate_iqr", "params": ["q1_val", "q3_val"] },
+    "variable_generators": {
+      "q1_val": {"type": "random_int_range", "min": 10, "max": 30},
+      "iqr_val": {"type": "random_int_range", "min": 5, "max": 20},
+      "q3_val": {"type": "sum_vars", "vars_to_sum": ["q1_val", "iqr_val"]}
+    },
+    "explanation_template": "IQR = Q3 - Q1. Given Q1 = {q1_val} and Q3 = {q3_val}, IQR = {q3_val} - {q1_val} = {correct_ans}."
+  },
+  {
+      "id": "STAT_U1_T4_S1_M_LR_001",
+      "unit_name": "Unit-I Descriptive Statistics",
+      "topic_name": "Variance and Dispersion",
+      "subtopic_name": "Effect of Transformations on Mean",
+      "difficulty_level": "medium",
+      "difficulty_type": "logical reasoning",
+      "question_template": "If the mean of a dataset is {original_mean} and every value is multiplied by {multiplier}, what is the new mean?",
+      "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+      "answer_logic": {
+          "type": "mean_multiplication_effect",
+          "params": ["original_mean", "multiplier"]
+      },
+      "variable_generators": {
+          "original_mean": {"type": "random_int_range", "min": 10, "max": 50},
+          "multiplier": {"type": "random_int_range", "min": 2, "max": 5}
+      },
+      "explanation_template": "If every value in a dataset is multiplied by a constant '{multiplier}', the new mean is the original mean multiplied by that constant. New Mean = {original_mean} * {multiplier} = {correct_ans}."
+  },
+  {
+      "id": "STAT_U2_T1_S1_M_D_001",
+      "unit_name": "Unit-II Sampling and Distributions",
+      "topic_name": "Types of Sampling",
+      "subtopic_name": "Cluster Sampling Purpose",
+      "difficulty_level": "medium",
+      "difficulty_type": "direct",
+      "question_template": "What is the main purpose of cluster sampling?",
+      "options_template": [
+          "To ensure subgroups are represented proportionally",
+          "To simplify data collection, often by reducing travel",
+          "To reduce the population variance",
+          "To increase the randomness of individual selection"
+      ],
+      "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+      "variable_generators": {},
+      "explanation_template": "Cluster sampling involves dividing the population into clusters, randomly selecting clusters, and then sampling all individuals within selected clusters. It simplifies data collection, especially when the population is geographically dispersed."
+  },
+  {
+    "id": "STAT_U5_T2_S1_M_D_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Statistical Tests",
+    "subtopic_name": "Power of a Test Definition",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "The power of a statistical test is:",
+    "options_template": [
+      "The probability of rejecting H₀ when it is true (Type I error)",
+      "The probability of not rejecting H₀ when it is false (Type II error)",
+      "The probability of rejecting H₀ when it is false (Correctly rejecting a false null)",
+      "The probability of not rejecting H₀ when it is true (Correctly not rejecting a true null)"
+    ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 2 },
+    "variable_generators": {},
+    "explanation_template": "The power of a test (1 - β) is the probability of correctly rejecting a null hypothesis when it is indeed false."
+  },
+  {
+    "id": "STAT_U4_T5_S1_H_A_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Confidence Intervals",
+    "subtopic_name": "Calculating CI for Population Mean (Known Sigma)",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "For a sample size of {sample_size}, the sample mean is {sample_mean} and the population standard deviation is {pop_std_dev}. What is the 95% confidence interval for the population mean? (Use z = 1.96)",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_ci_mean_known_sigma",
+        "params": ["sample_mean", "pop_std_dev", "sample_size"],
+        "z_value_fixed": 1.96
+    },
+    "variable_generators": {
+        "sample_size": {"type": "random_choice", "choices": [36, 49, 64, 81, 100, 121, 144]},
+        "sample_mean": {"type": "random_int_range", "min": 50, "max": 100},
+        "pop_std_dev": {"type": "random_int_range", "min": 10, "max": 30}
+    },
+    "explanation_template": "The 95% CI is: Sample Mean ± (z * (Population Std Dev / sqrt(Sample Size))). Given Sample Mean={sample_mean}, Pop Std Dev={pop_std_dev}, Sample Size={sample_size}, z=1.96. Lower bound = {lower_bound_calc}, Upper bound = {upper_bound_calc}. So, CI is ({lower_bound}, {upper_bound})."
+  },
+  {
+    "id": "STAT_U1_T1_S2_E_D_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Data Visualization",
+    "subtopic_name": "Best Graph for Categorical Data Distribution",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "Which graphical method is best for showing the distribution of a categorical variable?",
+    "options_template": [ "Histogram", "Pie chart", "Boxplot", "Scatter plot" ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 1 },
+    "variable_generators": {},
+    "explanation_template": "Pie charts and bar charts are commonly used for displaying the distribution of categorical variables. Histograms and boxplots are for numerical data, and scatter plots show relationships between two numerical variables."
+  },
+  {
+    "id": "STAT_U1_T3_S3_M_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Central Tendency",
+    "subtopic_name": "Finding Missing Value for Given Mean",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "The mean of the dataset {dataset_known_values_str} and an unknown value 'x' is {target_mean}. What is the value of x?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "find_missing_value_for_mean",
+        "params": ["dataset_known_values_arr", "target_mean"]
+    },
+    "variable_generators": {
+        "num_known_values": {"type": "random_int_range", "min": 3, "max": 5},
+        "dataset_known_values_arr": {"type": "generate_int_array", "size_var": "num_known_values", "min_val": 5, "max_val": 25},
+        "dataset_known_values_str": {"type": "array_to_string", "source_var": "dataset_known_values_arr"},
+        "missing_value_x": {"type": "random_int_range", "min": 5, "max": 30},
+        "target_mean": {"type": "calculate_mean_with_missing", "known_values_var": "dataset_known_values_arr", "missing_value_var": "missing_value_x"}
+    },
+    "explanation_template": "Let the known values sum to S. The total number of values is {num_known_values} + 1. The mean is (S + x) / ({num_known_values} + 1) = {target_mean}. Solving for x: x = ({target_mean} * ({num_known_values} + 1)) - S. Here S = {sum_known_values}, so x = {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T3_S1_M_LR_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sampling Distributions",
+    "subtopic_name": "Impact of Sample Size on Distribution Shape",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "If the population distribution is heavily skewed to the right, what happens to the shape of the sampling distribution of the sample mean as the sample size (n) becomes very large (e.g., n > {large_n_example})?",
+    "options_template": [
+      "It becomes approximately normal",
+      "It remains heavily skewed to the right",
+      "It becomes skewed to the left",
+      "Its shape cannot be determined"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 0},
+    "variable_generators": {
+        "large_n_example": {"type": "random_choice", "choices": [30, 50, 100]}
+    },
+    "explanation_template": "Due to the Central Limit Theorem, even if the population distribution is skewed, the sampling distribution of the sample mean tends towards a normal distribution as the sample size increases significantly (typically n > 30 or n > {large_n_example})."
+  },
+  {
+    "id": "STAT_U3_T1_S1_E_D_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Joint Variable Behavior",
+    "subtopic_name": "Identifying Independent Variables",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "If two random variables X and Y are independent, what can be said about their covariance, Cov(X,Y)?",
+    "options_template": [
+      "Cov(X,Y) = 0",
+      "Cov(X,Y) > 0",
+      "Cov(X,Y) < 0",
+      "Cov(X,Y) = Var(X) * Var(Y)"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 0},
+    "variable_generators": {},
+    "explanation_template": "If X and Y are independent random variables, their covariance is 0. However, Cov(X,Y) = 0 does not necessarily imply independence, only uncorrelation."
+  },
+  {
+    "id": "STAT_U4_T3_S1_M_A_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Point Estimation",
+    "subtopic_name": "Point Estimate for Population Proportion",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "In a sample of {sample_size_prop} items, {num_successes} items were found to have a specific characteristic. What is the point estimate for the population proportion (p̂) of items with this characteristic?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_point_estimate_proportion",
+        "params": ["num_successes", "sample_size_prop"]
+    },
+    "variable_generators": {
+        "sample_size_prop": {"type": "random_int_range", "min": 50, "max": 200},
+        "proportion_true": {"type": "random_float_range", "min": 0.1, "max": 0.9, "decimals": 2},
+        "num_successes": {"type": "calculate_successes_from_prop", "sample_size_var": "sample_size_prop", "proportion_var": "proportion_true"}
+    },
+    "explanation_template": "The point estimate for the population proportion (p̂) is the sample proportion, calculated as (Number of Successes) / (Sample Size). So, p̂ = {num_successes} / {sample_size_prop} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U5_T3_S1_M_LR_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "P-value Analysis",
+    "subtopic_name": "Interpreting P-value vs Alpha",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "If a hypothesis test yields a p-value of {p_value_gen} and the significance level (α) is {alpha_level_gen}, what is the correct decision?",
+    "options_template": [
+      "Reject the null hypothesis (H₀)",
+      "Fail to reject the null hypothesis (H₀)",
+      "Accept the null hypothesis (H₀)",
+      "The test is inconclusive"
+    ],
+    "answer_logic": {
+        "type": "p_value_decision",
+        "params": ["p_value_gen", "alpha_level_gen"]
+    },
+    "variable_generators": {
+        "alpha_level_gen": {"type": "random_choice", "choices": [0.01, 0.05, 0.10]},
+        "p_value_scenario": {"type": "random_choice", "choices": ["less_than_alpha", "greater_than_alpha"]},
+        "p_value_gen": {"type": "generate_p_value_relative_to_alpha", "alpha_var": "alpha_level_gen", "scenario_var": "p_value_scenario"}
+    },
+    "explanation_template": "If the p-value ({p_value_gen}) is less than or equal to the significance level α ({alpha_level_gen}), we reject H₀. If p-value > α, we fail to reject H₀. In this case, since {p_value_gen} {comparison_operator} {alpha_level_gen}, we {decision_text} H₀."
+  },
+  {
+    "id": "STAT_U1_T4_S2_M_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Variance and Dispersion",
+    "subtopic_name": "Calculating Standard Deviation from Variance",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "If the variance of a dataset is {variance_val}, what is its standard deviation?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "calculate_std_dev_from_variance",
+        "params": ["variance_val"]
+    },
+    "variable_generators": {
+        "std_dev_base": {"type": "random_int_range", "min": 2, "max": 12},
+        "variance_val": {"type": "square_value", "source_var": "std_dev_base"}
+    },
+    "explanation_template": "Standard Deviation is the square root of Variance. So, Std Dev = sqrt({variance_val}) = {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T4_S1_M_A_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Normal Distribution",
+    "subtopic_name": "Z-score Calculation",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A value from a normally distributed dataset is {x_val}. The mean of the dataset is {mean_val} and the standard deviation is {std_dev_val}. What is the z-score for this value?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_z_score",
+        "params": ["x_val", "mean_val", "std_dev_val"]
+    },
+    "variable_generators": {
+        "mean_val": {"type": "random_int_range", "min": 50, "max": 100},
+        "std_dev_val": {"type": "random_int_range", "min": 5, "max": 15},
+        "z_score_target": {"type": "random_choice", "choices": [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2]},
+        "x_val": {"type": "calculate_x_from_z", "mean_var": "mean_val", "std_dev_var": "std_dev_val", "z_score_var": "z_score_target"}
+    },
+    "explanation_template": "The z-score is calculated as (X - Mean) / Standard Deviation. So, z = ({x_val} - {mean_val}) / {std_dev_val} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T5_S2_H_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Confidence Intervals",
+    "subtopic_name": "Factors Affecting CI Width",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "Which of the following changes would result in a NARROWER confidence interval for a population mean, assuming other factors remain constant?",
+    "options_template": [
+      "Increasing the confidence level (e.g., from 95% to 99%)",
+      "Increasing the sample size",
+      "Increasing the sample standard deviation",
+      "Decreasing the sample mean"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "Increasing the sample size reduces the standard error, leading to a narrower confidence interval. Increasing confidence level or standard deviation widens the interval. Changing the sample mean shifts the interval but doesn't affect its width."
+  },
+  {
+    "id": "STAT_U5_T4_S1_M_D_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Error Types & Power",
+    "subtopic_name": "Type I Error Definition",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "In hypothesis testing, a Type I error occurs when:",
+    "options_template": [
+      "We fail to reject H₀ when H₀ is false",
+      "We reject H₀ when H₀ is true",
+      "We reject H₁ when H₁ is true",
+      "We fail to reject H₁ when H₁ is false"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "A Type I error (α) is the error of rejecting a true null hypothesis."
+  },
+  {
+    "id": "STAT_U1_T2_S1_E_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Data Visualization",
+    "subtopic_name": "Identifying Outliers from Boxplot",
+    "difficulty_level": "easy",
+    "difficulty_type": "aptitude",
+    "question_template": "Which graphical tool is typically best for visually identifying potential outliers in a numerical dataset?",
+    "options_template": [
+      "Pie Chart",
+      "Histogram",
+      "Boxplot (Box and Whisker Plot)",
+      "Frequency Polygon"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "Boxplots are specifically designed to show the distribution of data and highlight outliers, which appear as individual points beyond the 'whiskers'."
+  },
+  {
+    "id": "STAT_U2_T5_S1_M_A_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial & Poisson",
+    "subtopic_name": "Binomial Probability Calculation",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A fair coin is tossed {num_trials} times. What is the probability of getting exactly {num_successes} heads?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_binomial_probability",
+        "params": ["num_trials", "num_successes", "prob_success"]
+    },
+    "variable_generators": {
+        "num_trials": {"type": "random_int_range", "min": 3, "max": 6},
+        "num_successes": {"type": "random_int_range_dependent", "max_var": "num_trials", "min":0},
+        "prob_success": {"type": "fixed_value", "value": 0.5}
+    },
+    "explanation_template": "This is a binomial probability problem: P(X=k) = C(n,k) * p^k * (1-p)^(n-k). Here, n={num_trials}, k={num_successes}, p=0.5. The probability is {correct_ans}."
+  },
+  {
+    "id": "STAT_U3_T5_S1_M_D_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Law of Large Numbers",
+    "subtopic_name": "LLN Interpretation",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "According to the Law of Large Numbers, as the number of trials of a random experiment increases, the sample mean of the outcomes tends to get closer to what?",
+    "options_template": [
+      "The population variance",
+      "The population standard deviation",
+      "The expected value (population mean)",
+      "Zero"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "The Law of Large Numbers states that as the sample size increases, the sample mean converges to the population mean (or expected value)."
+  },
+  {
+    "id": "STAT_U4_T6_S1_M_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Population Differences",
+    "subtopic_name": "Interpreting CI for Difference in Means (Overlap)",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "If the 95% confidence interval for the difference between two population means (μ1 - μ2) is ({lower_bound_diff}, {upper_bound_diff}), what can we conclude about the means?",
+    "options_template": [
+      "μ1 is significantly greater than μ2",
+      "μ2 is significantly greater than μ1",
+      "There is no significant difference between μ1 and μ2",
+      "The sample sizes were too small"
+    ],
+    "answer_logic": {
+        "type": "interpret_ci_difference_means",
+        "params": ["lower_bound_diff", "upper_bound_diff"]
+    },
+    "variable_generators": {
+        "scenario_type": {"type": "random_choice", "choices": ["no_diff", "mu1_greater", "mu2_greater"]},
+        "lower_bound_diff": {"type": "generate_ci_diff_lower", "scenario_var": "scenario_type"},
+        "upper_bound_diff": {"type": "generate_ci_diff_upper", "scenario_var": "scenario_type", "lower_bound_var": "lower_bound_diff"}
+    },
+    "explanation_template": "If the confidence interval for the difference in means ({lower_bound_diff}, {upper_bound_diff}) contains zero, we conclude there's no significant difference. If it's entirely positive, μ1 > μ2. If entirely negative, μ2 > μ1. In this case, {conclusion_text}."
+  },
+  {
+    "id": "STAT_U5_T5_S1_H_A_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Testing Mean Differences",
+    "subtopic_name": "Calculating Test Statistic for Two Means",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "Two independent samples are taken. Sample 1: n₁={n1}, x̄₁={mean1}, s₁²={var1}. Sample 2: n₂={n2}, x̄₂={mean2}, s₂²={var2}. What is the approximate t-statistic for testing H₀: μ₁ - μ₂ = 0 (assuming unequal variances)?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_t_stat_two_means_unequal_var",
+        "params": ["n1", "mean1", "var1", "n2", "mean2", "var2"]
+    },
+    "variable_generators": {
+        "n1": {"type": "random_int_range", "min": 20, "max": 50},
+        "mean1": {"type": "random_float_range", "min": 60, "max": 80, "decimals": 1},
+        "std_dev1": {"type": "random_float_range", "min": 5, "max": 15, "decimals": 1},
+        "var1": {"type": "square_float_value", "source_var": "std_dev1"},
+        "n2": {"type": "random_int_range", "min": 20, "max": 50, "ensure_different_from": "n1"},
+        "mean2": {"type": "random_float_range", "min": 50, "max": 70, "decimals": 1, "ensure_different_from": "mean1"},
+        "std_dev2": {"type": "random_float_range", "min": 5, "max": 15, "decimals": 1, "ensure_different_from": "std_dev1"},
+        "var2": {"type": "square_float_value", "source_var": "std_dev2"}
+    },
+    "explanation_template": "The t-statistic for unequal variances is (x̄₁ - x̄₂) / sqrt(s₁²/n₁ + s₂²/n₂). Plugging in the values: t = ({mean1} - {mean2}) / sqrt({var1}/{n1} + {var2}/{n2}) ≈ {correct_ans}."
+  },
+  {
+    "id": "STAT_U1_T3_S4_M_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Central Tendency",
+    "subtopic_name": "Calculating Mode",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "What is the mode of the following dataset: {dataset_str}?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor_no_mode}"],
+    "answer_logic": {
+        "type": "calculate_mode",
+        "params": {"dataset_variable_name": "dataset_arr"}
+    },
+    "variable_generators": {
+        "dataset_base": {"type": "generate_int_array_with_mode", "size": 10, "min_val": 1, "max_val": 10, "mode_freq_min": 3},
+        "dataset_arr": {"type": "shuffle_array", "source_var": "dataset_base"},
+        "dataset_str": {"type": "array_to_string", "source_var": "dataset_arr"}
+    },
+    "explanation_template": "The mode is the most frequently occurring value in the dataset. In {dataset_str}, the value {correct_ans} appears most often."
+  },
+  {
+    "id": "STAT_U2_T1_S2_E_D_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Types of Sampling",
+    "subtopic_name": "Simple Random Sampling Definition",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "In which sampling method does every possible sample of a given size 'n' have an equal probability of being selected?",
+    "options_template": ["Convenience sampling", "Simple random sampling", "Stratified sampling", "Systematic sampling"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "Simple random sampling is defined as a method where every possible sample of size 'n' has an equal chance of selection from the population."
+  },
+  {
+    "id": "STAT_U4_T4_S1_M_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Interval Estimation",
+    "subtopic_name": "Interpretation of Confidence Level",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A {confidence_level_percent}% confidence interval for a population mean implies that:",
+    "options_template": [
+      "There is a {confidence_level_percent}% probability that the true population mean falls within this specific interval.",
+      "If we were to take many random samples and construct such intervals, about {confidence_level_percent}% of these intervals would contain the true population mean.",
+      "{confidence_level_percent}% of the sample data falls within this interval.",
+      "The sample mean is equal to the population mean with {confidence_level_percent}% certainty."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "confidence_level_percent": {"type": "random_choice", "choices": [90, 95, 99]}
+    },
+    "explanation_template": "The {confidence_level_percent}% confidence level refers to the long-run proportion of confidence intervals, constructed from repeated sampling, that would capture the true population parameter."
+  },
+  {
+    "id": "STAT_U5_T4_S2_M_D_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Error Types & Power",
+    "subtopic_name": "Type II Error Definition",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "A Type II error (denoted by β) in hypothesis testing occurs when:",
+    "options_template": [
+      "A true null hypothesis is rejected.",
+      "A false null hypothesis is not rejected.",
+      "A true alternative hypothesis is rejected.",
+      "A false alternative hypothesis is not rejected."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "A Type II error (β) is the error of failing to reject a null hypothesis when it is actually false."
+  },
+  {
+    "id": "STAT_U3_T4_S1_H_A_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Variance-Covariance Matrix",
+    "subtopic_name": "Properties of Variance-Covariance Matrix",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "Which of the following is ALWAYS true for a variance-covariance matrix of two variables X and Y?",
+    "options_template": [
+      "It is a diagonal matrix.",
+      "All off-diagonal elements are zero.",
+      "It is symmetric, and diagonal elements are non-negative.",
+      "The determinant is always 1."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "A variance-covariance matrix is always symmetric (Cov(X,Y) = Cov(Y,X)), and its diagonal elements are variances (Var(X), Var(Y)), which must be non-negative."
+  },
+  {
+    "id": "STAT_U2_T5_S2_H_A_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial & Poisson",
+    "subtopic_name": "Poisson Approximation to Binomial",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "Under what conditions can a Poisson distribution be used to approximate a Binomial distribution with parameters n (number of trials) and p (probability of success)?",
+    "options_template": [
+      "When n is small and p is large",
+      "When n is large and p is close to 0.5",
+      "When n is large and p is small (np ≈ λ)",
+      "When n is small and p is small"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "The Poisson distribution can approximate the Binomial distribution when 'n' (number of trials) is large and 'p' (probability of success) is small, such that their product np (the mean, λ) is moderate."
+  },
+  {
+    "id": "STAT_U1_T1_S1_E_D_002",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Describing data sets - Frequency tables and graphs, relative frequency tables and graphs",
+    "subtopic_name": "Relative Frequency Calculation",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "In a dataset of {total_observations} observations, a particular category appears {category_frequency} times. What is the relative frequency of this category?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_relative_frequency",
+        "params": ["category_frequency", "total_observations"]
+    },
+    "variable_generators": {
+        "total_observations": {"type": "random_int_range", "min": 20, "max": 100},
+        "category_frequency": {"type": "random_int_range_dependent_max", "max_var": "total_observations", "min": 5}
+    },
+    "explanation_template": "Relative Frequency = (Frequency of Category) / (Total Number of Observations). So, Relative Frequency = {category_frequency} / {total_observations} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U1_T1_S2_M_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Describing data sets - Grouped data, histograms",
+    "subtopic_name": "Interpreting Histograms (Shape)",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A histogram shows a long tail extending to the right, with most of the data concentrated on the left. This distribution is best described as:",
+    "options_template": [
+        "Symmetric",
+        "Skewed to the right (Positively skewed)",
+        "Skewed to the left (Negatively skewed)",
+        "Uniform"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "A long tail to the right indicates a right-skewed or positively skewed distribution."
+  },
+  {
+    "id": "STAT_U2_T1_S3_M_D_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Types of sampling",
+    "subtopic_name": "Stratified Sampling",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "Which sampling technique involves dividing the population into distinct subgroups (strata) and then drawing random samples from each subgroup?",
+    "options_template": ["Simple Random Sampling", "Systematic Sampling", "Stratified Sampling", "Cluster Sampling"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "Stratified sampling divides the population into homogeneous subgroups (strata) and samples independently from each stratum, often to ensure representation."
+  },
+  {
+    "id": "STAT_U2_T2_S3_H_A_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sample Variance",
+    "subtopic_name": "Calculating Sample Variance",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "Given the dataset: {dataset_str}, calculate the sample variance (s²).",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_sample_variance",
+        "params": ["dataset_arr"]
+    },
+    "variable_generators": {
+        "dataset_size": {"type": "random_int_range", "min": 4, "max": 6},
+        "dataset_arr": {"type": "generate_int_array", "size_var": "dataset_size", "min_val": 1, "max_val": 10},
+        "dataset_str": {"type": "array_to_string", "source_var": "dataset_arr"}
+    },
+    "explanation_template": "Sample Variance s² = Σ(xᵢ - x̄)² / (n-1). For the dataset {dataset_str}, the mean x̄ ≈ {sample_mean_calc}. The sum of squared deviations is ≈ {sum_sq_dev_calc}. Thus, s² ≈ {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T4_S2_M_LR_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Normal Distribution",
+    "subtopic_name": "Empirical Rule (68-95-99.7)",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "For a normally distributed dataset, approximately what percentage of observations fall within one standard deviation of the mean (μ ± σ)?",
+    "options_template": ["About 34%", "About 50%", "About 68%", "About 95%"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "According to the empirical rule (or 68-95-99.7 rule), approximately 68% of data in a normal distribution falls within one standard deviation of the mean."
+  },
+  {
+    "id": "STAT_U3_T3_S1_M_D_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Sums of independent random variables",
+    "subtopic_name": "Variance of Sum of Independent Variables",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "If X and Y are independent random variables with Var(X) = {var_x_val} and Var(Y) = {var_y_val}, what is Var(X + Y)?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "variance_sum_independent_vars",
+        "params": ["var_x_val", "var_y_val"]
+    },
+    "variable_generators": {
+        "var_x_val": {"type": "random_int_range", "min": 5, "max": 20},
+        "var_y_val": {"type": "random_int_range", "min": 5, "max": 20}
+    },
+    "explanation_template": "For independent random variables, the variance of their sum is the sum of their variances: Var(X + Y) = Var(X) + Var(Y) = {var_x_val} + {var_y_val} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T2_S1_E_D_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Types of Estimators",
+    "subtopic_name": "Unbiased Estimator Property",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "An estimator is considered unbiased if:",
+    "options_template": [
+        "Its variance is the smallest possible.",
+        "Its expected value is equal to the population parameter it is estimating.",
+        "It always equals the true population parameter.",
+        "It converges to the true parameter as sample size increases."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "An unbiased estimator is one whose expected value (the average of its values over many samples) is equal to the true value of the parameter being estimated."
+  },
+  {
+    "id": "STAT_U4_T7_S1_M_A_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Choosing the Sample size",
+    "subtopic_name": "Sample Size for Proportion (No Prior Info)",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "To estimate a population proportion with a margin of error of {margin_error} at a {confidence_level_percent}% confidence level (z-value = {z_value_prop}), what minimum sample size is needed if no prior estimate of the proportion is available?",
+    "options_template": ["{option_correct_int}", "{option_distractor1_int}", "{option_distractor2_int}", "{option_distractor3_int}"],
+    "answer_logic": {
+        "type": "sample_size_proportion_no_prior",
+        "params": ["margin_error", "z_value_prop"]
+    },
+    "variable_generators": {
+        "margin_error": {"type": "random_choice", "choices": [0.03, 0.04, 0.05]},
+        "confidence_level_percent": {"type": "conditional_value", "condition_var": "margin_error", "conditions_values": [{"if_val": 0.03, "then_val": 95}, {"if_val": 0.04, "then_val": 95}, {"if_val": 0.05, "then_val": 90}]},
+        "z_value_prop": {"type": "conditional_value", "condition_var": "confidence_level_percent", "conditions_values": [{"if_val": 90, "then_val": 1.645}, {"if_val": 95, "then_val": 1.96}, {"if_val": 99, "then_val": 2.576}]}
+    },
+    "explanation_template": "Sample size n = (z² * p * (1-p)) / E². When p is unknown, use p=0.5 for maximum n. So, n = ({z_value_prop}² * 0.25) / {margin_error}² ≈ {correct_ans}, always rounded up."
+  },
+  {
+    "id": "STAT_U5_T1_S2_M_D_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Essentials of the test, calculating the p-value",
+    "subtopic_name": "Significance Level (Alpha)",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "In hypothesis testing, the significance level (α) represents:",
+    "options_template": [
+      "The probability of making a Type II error.",
+      "The probability of correctly rejecting a false null hypothesis.",
+      "The maximum acceptable probability of making a Type I error.",
+      "The smallest p-value for which H₀ can be rejected."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "The significance level (α) is the pre-determined threshold for the probability of committing a Type I error (rejecting a true null hypothesis)."
+  },
+  {
+    "id": "STAT_U5_T6_S1_M_A_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Hypothesis testing for the binomial",
+    "subtopic_name": "Binomial Test for Proportion",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A coin is tossed {n_binomial_test} times, resulting in {k_successes_binomial} heads. To test if the coin is fair (H₀: p=0.5) against H₁: p ≠ 0.5, what is the next step after observing the outcome?",
+    "options_template": [
+      "Calculate the sample mean.",
+      "Calculate the p-value using the binomial distribution.",
+      "Assume the coin is biased.",
+      "Increase the number of tosses."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "n_binomial_test": {"type": "random_int_range", "min":10, "max": 20},
+        "k_successes_binomial": {"type": "random_int_range_dependent_max", "max_var":"n_binomial_test", "min":0}
+    },
+    "explanation_template": "For a binomial test, after observing {k_successes_binomial} successes in {n_binomial_test} trials, you would calculate the p-value, which is the probability of observing a result as extreme or more extreme, assuming the null hypothesis (p=0.5) is true."
+  },
+  {
+    "id": "STAT_U1_T4_S1_M_D_002",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Variance and Dispersion",
+    "subtopic_name": "Understanding Sample Variance Formula",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "When calculating sample variance, why is the sum of squared deviations divided by (n-1) instead of n?",
+    "options_template": [
+      "To make the calculation simpler.",
+      "To ensure the estimator is unbiased for the population variance.",
+      "Because one observation is always discarded.",
+      "To increase the variance estimate."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "Dividing by (n-1) (Bessel's correction) makes the sample variance an unbiased estimator of the population variance. Dividing by n would, on average, underestimate the population variance."
+  },
+  {
+    "id": "STAT_U2_T5_S2_M_LR_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial & Poisson distributions using normal distribution",
+    "subtopic_name": "Continuity Correction for Normal Approx to Binomial",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "When approximating a binomial distribution with a normal distribution to find P(X ≤ {k_val}), the continuity correction involves calculating P(Z ≤ ?)",
+    "options_template": [
+      "({k_val} - np) / sqrt(np(1-p))",
+      "({k_val} + 0.5 - np) / sqrt(np(1-p))",
+      "({k_val} - 0.5 - np) / sqrt(np(1-p))",
+      "({k_val} + 1 - np) / sqrt(np(1-p))"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "k_val": {"type": "random_int_range", "min":5, "max":15}
+    },
+    "explanation_template": "For P(X ≤ k) using normal approximation to binomial, the continuity correction adjusts k to k+0.5. So, we calculate P(Z ≤ ({k_val} + 0.5 - μ) / σ)."
+  },
+  {
+    "id": "STAT_U3_T1_S2_M_A_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Correlation",
+    "subtopic_name": "Calculating Correlation Coefficient",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "If Cov(X,Y) = {cov_xy}, Var(X) = {var_x_corr}, and Var(Y) = {var_y_corr}, what is the correlation coefficient r(X,Y)?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_correlation_coefficient",
+        "params": ["cov_xy", "var_x_corr", "var_y_corr"]
+    },
+    "variable_generators": {
+        "std_dev_x_c": {"type": "random_int_range", "min": 2, "max": 6},
+        "std_dev_y_c": {"type": "random_int_range", "min": 2, "max": 6, "ensure_different_from":"std_dev_x_c"},
+        "var_x_corr": {"type": "square_value", "source_var": "std_dev_x_c"},
+        "var_y_corr": {"type": "square_value", "source_var": "std_dev_y_c"},
+        "corr_coeff_target": {"type": "random_choice", "choices": [-0.8, -0.5, 0.1, 0.4, 0.7]},
+        "cov_xy": {"type": "calculate_cov_from_target_corr", "target_corr_var": "corr_coeff_target", "std_dev_x_var": "std_dev_x_c", "std_dev_y_var": "std_dev_y_c"}
+    },
+    "explanation_template": "Correlation r(X,Y) = Cov(X,Y) / (StdDev(X) * StdDev(Y)). StdDev(X)=sqrt({var_x_corr}), StdDev(Y)=sqrt({var_y_corr}). So, r = {cov_xy} / (sqrt({var_x_corr}) * sqrt({var_y_corr})) = {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T1_S1_E_D_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Statistical Inference",
+    "subtopic_name": "Goal of Statistical Inference",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is the primary goal of statistical inference?",
+    "options_template": [
+      "To describe the characteristics of a sample.",
+      "To make conclusions about a population based on sample data.",
+      "To collect data as efficiently as possible.",
+      "To prove a hypothesis with absolute certainty."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "Statistical inference uses data from a sample to draw conclusions or make predictions about the larger population from which the sample was drawn."
+  },
+  {
+    "id": "STAT_U5_T7_S1_M_LR_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Some comments on testing of hypothesis",
+    "subtopic_name": "Practical vs Statistical Significance",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A hypothesis test results in a very small p-value (e.g., p < 0.001), leading to rejection of the null hypothesis. This means:",
+    "options_template": [
+      "The observed effect is definitely large and practically important.",
+      "There is strong statistical evidence against the null hypothesis, but the effect size might still be small.",
+      "The null hypothesis is proven to be false with certainty.",
+      "The sample size was likely too small."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "Statistical significance (small p-value) indicates that an observed effect is unlikely due to chance alone, assuming H₀ is true. It does not, by itself, imply that the effect is large or practically meaningful. Effect size should be considered separately."
+  },
+  {
+    "id": "STAT_U1_T5_S2_H_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Percentiles and Box plots",
+    "subtopic_name": "Calculating a Specific Percentile",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "For the dataset: {dataset_str_percentile}, what is the value of the {percentile_k}th percentile?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "calculate_kth_percentile",
+        "params": ["dataset_arr_percentile", "percentile_k"]
+    },
+    "variable_generators": {
+        "dataset_size_p": {"type": "random_int_range", "min": 9, "max": 15},
+        "dataset_arr_percentile_unsorted": {"type": "generate_int_array", "size_var": "dataset_size_p", "min_val":10, "max_val":100},
+        "dataset_arr_percentile": {"type": "sort_array", "source_var": "dataset_arr_percentile_unsorted"},
+        "dataset_str_percentile": {"type": "array_to_string", "source_var": "dataset_arr_percentile"},
+        "percentile_k": {"type": "random_choice", "choices": [25, 50, 75]}
+    },
+    "explanation_template": "To find the {percentile_k}th percentile: 1. Sort the data: {dataset_str_percentile}. 2. Calculate rank: R = (P/100) * N. If R is integer, average Rth and (R+1)th values. If not, round up to next integer for rank. Here, value is {correct_ans}."
+  },
+  {
+    "id": "STAT_U3_T4_S1_M_D_002",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Variance-Covariance Matrix",
+    "subtopic_name": "Diagonal Elements Interpretation",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "In a variance-covariance matrix for variables X and Y, what do the diagonal elements represent?",
+    "options_template": [
+      "Covariance between X and Y",
+      "Correlation coefficient between X and Y",
+      "Variances of X and Y respectively",
+      "Means of X and Y respectively"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "The diagonal elements of a variance-covariance matrix represent the variances of the individual variables (e.g., Var(X) and Var(Y)). Off-diagonal elements represent covariances (e.g., Cov(X,Y))."
+  },
+  {
+    "id": "STAT_U4_T5_S3_H_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Confidence Intervals",
+    "subtopic_name": "Choosing Sample Size based on Desired CI Width",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A researcher wants to estimate the population mean with a 95% confidence interval. To reduce the width of the confidence interval by half, approximately how should the sample size be changed?",
+    "options_template": [
+      "Halved",
+      "Kept the same",
+      "Doubled",
+      "Quadrupled (multiplied by 4)"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 3},
+    "variable_generators": {},
+    "explanation_template": "The width of a confidence interval for a mean is proportional to 1/sqrt(n). To halve the width, 1/sqrt(n) must be halved, which means sqrt(n) must be doubled, so n must be quadrupled."
+  },
+  {
+    "id": "STAT_U5_T6_S2_H_A_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Hypothesis testing and confidence intervals",
+    "subtopic_name": "Relating CI to Two-Tailed Test",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "A 95% confidence interval for a population mean μ is found to be ({ci_lower}, {ci_upper}). If we conduct a two-tailed hypothesis test for H₀: μ = {mu_null_val} against H₁: μ ≠ {mu_null_val} at α = 0.05, what would be the decision?",
+    "options_template": [
+        "Reject H₀",
+        "Fail to reject H₀",
+        "Accept H₀",
+        "More information is needed"
+    ],
+    "answer_logic": {
+        "type": "ci_to_hypothesis_test_decision",
+        "params": ["ci_lower", "ci_upper", "mu_null_val"]
+    },
+    "variable_generators": {
+        "ci_mean_center": {"type": "random_int_range", "min": 90, "max": 110},
+        "ci_half_width": {"type": "random_int_range", "min": 2, "max": 8},
+        "ci_lower": {"type": "subtract_vars", "var1": "ci_mean_center", "var2": "ci_half_width"},
+        "ci_upper": {"type": "sum_vars", "vars_to_sum": ["ci_mean_center", "ci_half_width"]},
+        "null_scenario": {"type": "random_choice", "choices": ["inside_ci", "outside_ci"]},
+        "mu_null_val": {"type": "generate_mu_null_for_ci_test", "scenario_var": "null_scenario", "lower_var": "ci_lower", "upper_var": "ci_upper", "center_var": "ci_mean_center"}
+    },
+    "explanation_template": "If the null hypothesis value ({mu_null_val}) falls within the 95% confidence interval ({ci_lower}, {ci_upper}), we fail to reject H₀ at α=0.05. If it falls outside, we reject H₀. In this case, {mu_null_val} is {relation_to_interval}, so we {decision_text}."
+  },
+  {
+    "id": "STAT_U2_T2_S1_E_D_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sample Mean",
+    "subtopic_name": "Definition of Sample Mean",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "The sample mean is calculated by:",
+    "options_template": [
+      "Summing all values and dividing by (n-1).",
+      "Finding the most frequent value.",
+      "Summing all values and dividing by the number of values (n).",
+      "Taking the square root of the sample variance."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "The sample mean (x̄) is the sum of all observed values in a sample divided by the total number of observations (n) in that sample."
+  },
+  {
+    "id": "STAT_U2_T5_S1_H_A_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial & Poisson",
+    "subtopic_name": "Binomial Probability in Manufacturing",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "A factory produces {item_plural}, and historical data suggests that {defect_rate_percent}% of them are defective. If a quality inspector randomly selects {sample_size_items} {item_plural} for testing, what is the probability that no more than {max_defects} will be found defective in this batch?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_binomial_cumulative_probability_le",
+        "params": ["sample_size_items", "max_defects", "defect_rate_decimal"]
+    },
+    "variable_generators": {
+        "item_plural": {"type": "random_choice", "choices": ["light bulbs", "circuit boards", "widgets", "sensors"]},
+        "defect_rate_percent": {"type": "random_int_range", "min": 2, "max": 10},
+        "defect_rate_decimal": {"type": "percent_to_decimal", "source_var": "defect_rate_percent"},
+        "sample_size_items": {"type": "random_int_range", "min": 8, "max": 15},
+        "max_defects": {"type": "random_int_range_dependent_max_strict", "max_var": "sample_size_items", "min": 0, "max_plus": -2}
+    },
+    "explanation_template": "This is a binomial distribution problem where n={sample_size_items}, p={defect_rate_decimal}. We need P(X ≤ {max_defects}). This involves summing P(X=0) + P(X=1) + ... + P(X={max_defects}). The calculated probability is approximately {correct_ans}."
+  },
+  {
+    "id": "STAT_U5_T5_S2_H_LR_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Testing Mean Differences",
+    "subtopic_name": "Interpreting Two-Sample Test Results (Argument)",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "{person1_name} claims their new study method significantly improves test scores compared to {person2_name}'s traditional method. After an experiment, a t-test for the difference in mean scores (New Method - Traditional Method) yielded a p-value of {p_value_argument}. If they are using a significance level of α = 0.05, what is the most statistically sound conclusion regarding {person1_name}'s claim?",
+    "options_template": [
+      "There's strong evidence {person1_name}'s method is better.",
+      "There's not enough evidence to say {person1_name}'s method is definitively better than {person2_name}'s.",
+      "{person2_name}'s method is proven to be superior.",
+      "The experiment was flawed because p-values can be misleading."
+    ],
+    "answer_logic": {
+        "type": "hypothesis_decision_worded",
+        "params": ["p_value_argument", "alpha_fixed"],
+        "alpha_fixed": 0.05,
+        "interpretation_if_reject": "There's strong evidence {person1_name}'s method is better.",
+        "interpretation_if_fail_reject": "There's not enough evidence to say {person1_name}'s method is definitively better than {person2_name}'s."
+    },
+    "variable_generators": {
+        "person1_name": {"type": "random_choice", "choices": ["Alex", "Sam", "Jordan", "Chris"]},
+        "person2_name": {"type": "random_choice_different", "choices": ["Jamie", "Taylor", "Morgan", "Riley"], "different_from_var": "person1_name"},
+        "p_value_scenario_arg": {"type": "random_choice", "choices": ["significant", "not_significant"]},
+        "p_value_argument": {"type": "generate_p_value_for_scenario", "scenario_var": "p_value_scenario_arg", "alpha": 0.05}
+    },
+    "explanation_template": "If p-value ({p_value_argument}) ≤ α (0.05), we reject H₀ (no difference) in favor of H₁ ({person1_name}'s method is better). If p-value > α, we fail to reject H₀. Here, the decision is: {correct_ans_text}"
+  },
+  {
+    "id": "STAT_U2_T5_S3_H_A_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial & Poisson",
+    "subtopic_name": "Poisson for Rare Events in Time/Space",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "A call center receives an average of {avg_calls_rate} calls per hour. Assuming calls arrive independently and at a constant rate, what is the approximate probability that they will receive exactly {exact_calls_target} calls in the next {num_hours} hours?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+    "type": "calculate_poisson_probability"
+},
+    "variable_generators": {
+        "avg_calls_rate": {"type": "random_int_range", "min": 2, "max": 5},
+        "num_hours": {"type": "random_int_range", "min": 1, "max": 3},
+        "lambda_calculated": {"type": "multiply_vars", "vars": ["avg_calls_rate", "num_hours"]},
+        "exact_calls_target": {"type": "random_int_near_lambda", "lambda_var": "lambda_calculated", "range_around": 2}
+    },
+    "explanation_template": "This models a Poisson process. The average rate for {num_hours} hours is λ = {avg_calls_rate} * {num_hours} = {lambda_calculated}. P(X=k) = (e^(-λ) * λ^k) / k!. For k={exact_calls_target}, P(X={exact_calls_target}) ≈ {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T5_S4_H_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Confidence Intervals",
+    "subtopic_name": "Misinterpretation of CI",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A researcher calculates a 95% confidence interval for the average height of adult {nationality} males as [{lower_height_ci} cm, {upper_height_ci} cm]. Which of the following is an INCORRECT interpretation of this interval?",
+    "options_template": [
+      "We are 95% confident that the true average height of adult {nationality} males lies between {lower_height_ci} cm and {upper_height_ci} cm.",
+      "If we repeated this study many times, 95% of the calculated confidence intervals would contain the true population mean height.",
+      "There is a 95% probability that any randomly selected adult {nationality} male will have a height between {lower_height_ci} cm and {upper_height_ci} cm.",
+      "The interval provides a range of plausible values for the true population mean height based on the sample data."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {
+        "nationality": {"type": "random_choice", "choices": ["Swedish", "Brazilian", "Japanese", "Canadian"]},
+        "lower_height_ci": {"type": "random_float_range", "min":165.0, "max":175.0, "decimals":1},
+        "upper_height_ci": {"type": "random_float_range_plus", "base_var":"lower_height_ci", "min_add":5.0, "max_add":10.0, "decimals":1}
+    },
+    "explanation_template": "A confidence interval is about the population parameter (mean height), not individual observations. Option C incorrectly interprets the CI as a range for individual heights with 95% probability."
+  },
+  {
+    "id": "STAT_U5_T4_S3_M_A_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Error Types & Power",
+    "subtopic_name": "Calculating Beta (Type II Error Probability)",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A company claims its {product_name} has a mean lifetime of {mu_null} hours. A test is run with H₀: μ = {mu_null} vs H₁: μ < {mu_null} at α = 0.05. If the true mean lifetime is actually {mu_alt} hours (where {mu_alt} < {mu_null}) and the critical value for the sample mean is {critical_mean_val}, what concept helps quantify the probability of failing to detect this actual lower lifetime?",
+    "options_template": [
+      "Type I error (α)",
+      "Power of the test (1-β)",
+      "Type II error (β)",
+      "Significance level"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {
+        "product_name": {"type": "random_choice", "choices": ["SuperBattery", "EverGlow Bulb", "DuraWidget"]},
+        "mu_null": {"type": "random_int_range", "min": 480, "max": 520},
+        "mu_alt_diff": {"type": "random_int_range", "min": 10, "max": 30},
+        "mu_alt": {"type": "subtract_vars", "var1": "mu_null", "var2": "mu_alt_diff"},
+        "critical_mean_val": {"type": "random_int_range_between", "min_var": "mu_alt", "max_var": "mu_null", "offset": 5}
+    },
+    "explanation_template": "Failing to detect that the true mean ({mu_alt}) is less than the hypothesized mean ({mu_null}) when it actually is, is a Type II error. The probability of this is β."
+  },
+  {
+    "id": "STAT_U3_T7_S1_H_LR_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Central Limit Theorem",
+    "subtopic_name": "CLT Misconception (Individual Values)",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A large population of {item_plural_clt} has an average weight of {pop_mean_clt}g with a standard deviation of {pop_std_clt}g. The distribution of individual weights is unknown. If we take a random sample of {sample_size_clt} {item_plural_clt}, the Central Limit Theorem allows us to make strong claims about:",
+    "options_template": [
+      "The exact weight of each {item_singular_clt} in the sample.",
+      "The distribution of individual weights in the population becoming normal.",
+      "The approximate shape of the sampling distribution of the sample mean.",
+      "The population standard deviation becoming smaller."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {
+        "item_plural_clt": {"type": "random_choice", "choices": ["apples", "stones", "components", "widgets"]},
+        "item_singular_clt": {"type": "singular_form", "source_var": "item_plural_clt"},
+        "pop_mean_clt": {"type": "random_int_range", "min": 100, "max": 200},
+        "pop_std_clt": {"type": "random_int_range", "min": 10, "max": 30},
+        "sample_size_clt": {"type": "random_int_range", "min": 35, "max": 100}
+    },
+    "explanation_template": "The Central Limit Theorem (CLT) states that the sampling distribution of the sample mean (not individual values or the population distribution itself) will approximate a normal distribution for large enough sample sizes, regardless of the population's original distribution shape."
+  },
+  {
+    "id": "STAT_U1_T1_S3_M_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Summarising data sets - Sample Mean, sample median, sample mode, sample variance and sample standard deviation, percentiles and box-plots",
+    "subtopic_name": "Choosing Central Tendency for Skewed Data",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "The annual incomes of {num_employees} employees at a startup are recorded. Most earn between ${income_range_low} and ${income_range_high}, but the CEO earns ${ceo_income}. Which measure of central tendency would likely be most misleading if used to represent a 'typical' employee's income?",
+    "options_template": ["Median", "Mode", "Mean", "Interquartile Range"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {
+        "num_employees": {"type": "random_int_range", "min": 20, "max": 50},
+        "income_range_low": {"type": "random_int_range_step", "min": 40000, "max": 60000, "step": 5000},
+        "income_range_high": {"type": "random_int_range_step", "min": 70000, "max": 90000, "step": 5000},
+        "ceo_income": {"type": "random_int_range_step", "min": 300000, "max": 1000000, "step": 50000}
+    },
+    "explanation_template": "The mean is heavily influenced by outliers. The CEO's much higher income (${ceo_income}) would significantly pull the mean upwards, making it a misleading representation of a typical employee's income compared to the median or mode."
+  },
+  {
+    "id": "STAT_U2_T2_S4_M_LR_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sampling from a finite population",
+    "subtopic_name": "Finite Population Correction Factor Use",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A researcher is studying the average study time of {N_population} students in a specialized program. They plan to sample {n_sample_fpc} students. When calculating the standard error of the sample mean, should the finite population correction (FPC) factor be considered, and why?",
+    "options_template": [
+      "No, the FPC is only for proportions.",
+      "Yes, if the sample size (n) is more than 5% of the population size (N).",
+      "No, the FPC is never used for sample means.",
+      "Yes, but only if the population standard deviation is unknown."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "N_population": {"type": "random_int_range", "min":100, "max":500},
+        "n_sample_fpc_ratio": {"type": "random_choice", "choices": [0.03, 0.07, 0.15]}, 
+        "n_sample_fpc": {"type": "calculate_n_from_N_ratio", "N_var": "N_population", "ratio_var": "n_sample_fpc_ratio"}
+    },
+    "explanation_template": "The Finite Population Correction (FPC) factor is used when sampling without replacement and the sample size 'n' is a significant fraction of the population size 'N' (typically when n/N > 0.05). It adjusts the standard error downwards. Here, n/N = {n_sample_fpc}/{N_population} ≈ {n_N_ratio_calc}."
+  },
+  {
+    "id": "STAT_U4_T5_S5_M_A_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Large sample confidence interval for a population proportion",
+    "subtopic_name": "Calculating CI for Proportion",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "In a survey of {n_prop_ci} potential voters, {x_success_prop_ci} said they would vote for Candidate A. Construct a {conf_level_prop_ci}% confidence interval for the true proportion of voters who support Candidate A. (Use z-value for {conf_level_prop_ci}% = {z_val_prop_ci}).",
+    "options_template": ["({lower_bound_str}, {upper_bound_str})", "({dist1_l_str}, {dist1_u_str})", "({dist2_l_str}, {dist2_u_str})", "({dist3_l_str}, {dist3_u_str})"],
+    "answer_logic": {
+        "type": "calculate_ci_proportion",
+        "params": ["x_success_prop_ci", "n_prop_ci", "z_val_prop_ci"]
+    },
+    "variable_generators": {
+        "n_prop_ci": {"type": "random_int_range_step", "min": 200, "max": 1000, "step":100},
+        "p_hat_target": {"type": "random_float_range", "min":0.3, "max":0.7, "decimals":2},
+        "x_success_prop_ci": {"type": "calculate_successes_from_prop", "sample_size_var": "n_prop_ci", "proportion_var": "p_hat_target"},
+        "conf_level_prop_ci": {"type": "random_choice", "choices": [90, 95, 99]},
+        "z_val_prop_ci": {"type": "lookup_z_for_confidence", "conf_level_var": "conf_level_prop_ci"}
+    },
+    "explanation_template": "p̂ = {x_success_prop_ci}/{n_prop_ci} = {p_hat_calc}. SE(p̂) = sqrt(p̂(1-p̂)/n). Margin of Error = z * SE(p̂). CI = p̂ ± ME. The {conf_level_prop_ci}% CI is ({correct_lower_bound}, {correct_upper_bound})."
+  },
+  {
+    "id": "STAT_U5_T5_S3_H_A_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "A large-sample test of hypothesis for the difference between two population means",
+    "subtopic_name": "Hypothesis Test for Difference in Means (Two Proportions Scenario)",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "{company_a} claims their new {product_type} is preferred by more customers than {company_b}'s version. In a blind test, {n1_pref} out of {total1_pref} customers preferred {company_a}'s, while {n2_pref} out of {total2_pref} preferred {company_b}'s. Is there significant evidence at α={alpha_pref} to support {company_a}'s claim that their preference proportion (p1) is greater than {company_b}'s (p2)?",
+    "options_template": [
+      "Yes, reject H₀ (p1=p2) in favor of H₁ (p1>p2).",
+      "No, fail to reject H₀ (p1=p2).",
+      "The sample sizes are too small to conclude.",
+      "Yes, because {company_a}'s sample proportion is higher."
+    ],
+    "answer_logic": {
+        "type": "test_two_proportions_one_tailed",
+        "params": ["n1_pref", "total1_pref", "n2_pref", "total2_pref", "alpha_pref"]
+    },
+    "variable_generators": {
+        "company_a": {"type": "random_choice", "choices": ["AlphaTech", "BetaCorp", "Gamma Inc."]},
+        "company_b": {"type": "random_choice_different", "choices": ["Delta Solutions", "Epsilon Systems", "Zeta Products"], "different_from_var": "company_a"},
+        "product_type": {"type": "random_choice", "choices": ["smartphone app", "coffee blend", "snack bar"]},
+        "total1_pref": {"type": "random_int_range", "min": 80, "max": 150},
+        "total2_pref": {"type": "random_int_range", "min": 80, "max": 150},
+        "p1_true_scenario": {"type": "random_float_range", "min": 0.55, "max":0.70, "decimals":2},
+        "p2_true_scenario": {"type": "random_float_range", "min": 0.45, "max":0.55, "decimals":2},
+        "n1_pref": {"type": "calculate_successes_from_prop", "sample_size_var": "total1_pref", "proportion_var": "p1_true_scenario"},
+        "n2_pref": {"type": "calculate_successes_from_prop", "sample_size_var": "total2_pref", "proportion_var": "p2_true_scenario"},
+        "alpha_pref": {"type": "random_choice", "choices": [0.05, 0.01]}
+    },
+    "explanation_template": "We test H₀: p₁ - p₂ = 0 vs H₁: p₁ - p₂ > 0. Calculate pooled proportion p̂_pool, then z-statistic. Compare z to critical z for α={alpha_pref}, or p-value to α. Decision: {decision_text_from_logic}."
+  },
+  {
+    "id": "STAT_U1_T1_S4_M_LR_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Describing data sets - Frequency tables and graphs, relative frequency tables and graphs",
+    "subtopic_name": "Choosing Graph for Comparing Proportions",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A marketing team wants to compare the proportion of customers preferring three different packaging designs (Design A, Design B, Design C) for a new {product_cat}. Which graphical method would be most effective for this comparison?",
+    "options_template": [
+        "Scatter Plot",
+        "Histogram",
+        "Segmented Bar Chart or Multiple Pie Charts",
+        "Box Plot"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {
+        "product_cat": {"type": "random_choice", "choices": ["cereal", "soda", "shampoo"]}
+    },
+    "explanation_template": "To compare proportions across different categories (the designs), a segmented bar chart (where each bar is 100% and segments show proportions) or side-by-side pie charts (one for each design if comparing sub-proportions within them) would be effective. A simple grouped bar chart showing percentages would also work well."
+  },
+  {
+    "id": "STAT_U3_T1_S3_M_A_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Joint behavior of random variables",
+    "subtopic_name": "Expected Value of Product of Independent Variables",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "Two independent random variables, X and Y, have expected values E(X) = {ex_val} and E(Y) = {ey_val}. What is the expected value of their product, E(XY)?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "expected_value_product_independent",
+        "params": ["ex_val", "ey_val"]
+    },
+    "variable_generators": {
+        "ex_val": {"type": "random_int_range", "min": 2, "max": 10},
+        "ey_val": {"type": "random_int_range", "min": -5, "max": 5, "ensure_different_from": "ex_val"}
+    },
+    "explanation_template": "For independent random variables, E(XY) = E(X) * E(Y). So, E(XY) = {ex_val} * {ey_val} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T4_S2_M_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Interval Estimation - Constructing a confidence interval",
+    "subtopic_name": "Impact of Sample Variability on CI",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A quality control engineer takes two samples of {item_qc} from two different production lines. Sample A has a standard deviation of {std_dev_a} units, while Sample B has a standard deviation of {std_dev_b} units. If confidence intervals for the mean {item_qc_property} are constructed with the same sample size and confidence level, which sample is likely to yield a wider confidence interval?",
+    "options_template": [
+      "Sample A",
+      "Sample B",
+      "Both will have the same width",
+      "Cannot be determined without knowing the means"
+    ],
+    "answer_logic": {
+        "type": "compare_ci_width_by_std_dev",
+        "params": ["std_dev_a", "std_dev_b"]
+    },
+    "variable_generators": {
+        "item_qc": {"type": "random_choice", "choices": ["bearings", "resistors", "shafts"]},
+        "item_qc_property": {"type": "conditional_value", "condition_var":"item_qc", "conditions_values":[{"if_val":"bearings", "then_val":"diameter"}, {"if_val":"resistors", "then_val":"resistance"}, {"if_val":"shafts", "then_val":"length"}]},
+        "std_dev_a": {"type": "random_float_range", "min":0.1, "max":0.5, "decimals":2},
+        "std_dev_b_factor": {"type": "random_choice", "choices": [1.5, 2.0, 0.5, 0.75]}, 
+        "std_dev_b": {"type": "multiply_vars_float", "var1":"std_dev_a", "var2":"std_dev_b_factor", "decimals":2}
+    },
+    "explanation_template": "The width of a confidence interval is directly proportional to the standard deviation of the sample (or population). The sample with the larger standard deviation ({larger_std_dev_sample}) will produce a wider confidence interval, indicating more uncertainty about the population mean."
+  },
+  {
+    "id": "STAT_U5_T4_S3_H_LR_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Error Types & Power",
+    "subtopic_name": "Relationship between Alpha, Beta, and Sample Size",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A researcher wants to decrease the probability of both Type I (α) and Type II (β) errors in their hypothesis test for a new drug's effectiveness. Which of the following actions is most likely to achieve this simultaneously, without changing the underlying effect size of the drug?",
+    "options_template": [
+      "Decrease α (e.g., from 0.05 to 0.01)",
+      "Increase the power of the test by choosing a larger effect size to detect",
+      "Increase the sample size significantly",
+      "Use a one-tailed test instead of a two-tailed test"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "Decreasing α typically increases β (and vice-versa) for a fixed sample size. Increasing the sample size is the primary way to reduce both α (by maintaining it while increasing power) and β (as power = 1-β increases) simultaneously for a given effect size."
+  },
+  {
+    "id": "STAT_U1_T1_S5_M_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Summarising data sets - Sample Mean, sample median, sample mode, sample variance and sample standard deviation, percentiles and box-plots",
+    "subtopic_name": "Effect of Constant Addition on Standard Deviation",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "If every student in a class of {num_students_sd} receives an additional {points_added} bonus points on their exam scores, how does this affect the standard deviation of the exam scores?",
+    "options_template": [
+      "Increases by {points_added} points",
+      "Decreases by {points_added} points",
+      "Remains unchanged",
+      "Multiplies by {points_added}"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {
+        "num_students_sd": {"type": "random_int_range", "min":20, "max":50},
+        "points_added": {"type": "random_int_range", "min":5, "max":15}
+    },
+    "explanation_template": "Adding a constant to every value in a dataset shifts the entire distribution but does not change its spread. Therefore, the standard deviation (a measure of spread) remains unchanged."
+  },
+  {
+    "id": "STAT_U3_T1_S4_M_LR_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Independent random variables",
+    "subtopic_name": "Correlation of Independent Variables",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "Two variables, {var1_name} and {var2_name}, are known to be statistically independent. What is the most likely value for their Pearson correlation coefficient?",
+    "options_template": ["-1", "0", "1", "Cannot be determined without data"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "var1_name": {"type": "random_choice", "choices": ["Hours Studied", "Shoe Size", "Rainfall Amount"]},
+        "var2_name": {"type": "random_choice_different", "choices": ["Ice Cream Sales", "IQ Score", "Number of Siblings"], "different_from_var":"var1_name"}
+    },
+    "explanation_template": "If two variables are independent, they have no linear relationship, and thus their Pearson correlation coefficient is 0. The converse (correlation of 0 implies independence) is not always true, but independence always implies zero correlation."
+  },
+  {
+    "id": "STAT_U4_T6_S2_H_A_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Estimating the difference between two population means",
+    "subtopic_name": "Finding Sample Size for Difference in Means",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "A pharmaceutical company wants to compare a new drug with a placebo. They want to detect a true difference in mean blood pressure reduction of at least {effect_size_bp} mmHg with {power_percent}% power at α={alpha_bp_test} (two-tailed). Assuming the standard deviation of blood pressure reduction is {std_dev_bp} mmHg for both groups, approximately what sample size is needed per group?",
+    "options_template": ["{option_correct_int}", "{option_distractor1_int}", "{option_distractor2_int}", "{option_distractor3_int}"],
+    "answer_logic": {
+        "type": "sample_size_two_means",
+        "params": ["effect_size_bp", "std_dev_bp", "alpha_bp_test", "power_decimal"]
+    },
+    "variable_generators": {
+        "effect_size_bp": {"type": "random_int_range", "min":3, "max":8},
+        "power_percent": {"type": "random_choice", "choices":[80, 90]},
+        "power_decimal": {"type": "percent_to_decimal", "source_var": "power_percent"},
+        "alpha_bp_test": {"type": "random_choice", "choices":[0.05, 0.01]},
+        "std_dev_bp": {"type": "random_int_range", "min":5, "max":12}
+    },
+    "explanation_template": "The formula for sample size per group for two means is n = 2 * ( (Zα/2 + Zβ) * σ / Δ )², where Δ is the effect size ({effect_size_bp}), σ is {std_dev_bp}. Zα/2 for α={alpha_bp_test} and Zβ for power={power_percent}% are used. This yields n ≈ {correct_ans} per group."
+  },
+  {
+    "id": "STAT_U5_T5_S4_M_LR_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "A large-sample test of hypothesis for the difference between two population means",
+    "subtopic_name": "Conditions for Using Z-test for Two Means",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "When performing a z-test for the difference between two population means, which of the following conditions is NOT typically required if both sample sizes (n1 and n2) are large (e.g., > {large_n_ztest})?",
+    "options_template": [
+      "The samples are independent.",
+      "The samples are randomly selected.",
+      "Both populations are exactly normally distributed.",
+      "The population standard deviations are known or reliably estimated from large samples."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {
+        "large_n_ztest": {"type": "random_choice", "choices":[30,40,50]}
+    },
+    "explanation_template": "For large samples (n1, n2 > {large_n_ztest}), the Central Limit Theorem allows the use of a z-test even if the underlying populations are not perfectly normal. Independence and random sampling are crucial. Population standard deviations should be known, or sample standard deviations from large samples can be used as good estimates."
+  },
+  {
+    "id": "STAT_U2_T1_S4_M_D_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Types of sampling",
+    "subtopic_name": "Systematic Sampling Procedure",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "A researcher has a list of {N_sys_sample} company employees and wants to select a systematic sample of {n_sys_sample} employees. After randomly selecting the first employee from the first {k_interval} employees, how are subsequent employees chosen?",
+    "options_template": [
+      "By randomly selecting from the remaining employees.",
+      "By selecting every {k_interval}th employee from the list after the first.",
+      "By dividing the list into {n_sys_sample} strata and picking one from each.",
+      "By choosing employees whose ID numbers are prime."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "N_sys_sample": {"type": "random_int_range", "min":200, "max":500},
+        "n_sys_sample": {"type": "random_int_range", "min":10, "max":20},
+        "k_interval": {"type": "calculate_systematic_interval", "N_var":"N_sys_sample", "n_var":"n_sys_sample"}
+    },
+    "explanation_template": "In systematic sampling, after a random start, every k-th element is selected, where k (the sampling interval) is N/n. Here, k = {N_sys_sample}/{n_sys_sample} ≈ {k_interval}."
+  },
+  {
+    "id": "STAT_U1_T1_S6_M_A_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Describing data sets - Summarising data sets",
+    "subtopic_name": "Comparing Mean and Median in Skewed Competition Scores",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "In a local {competition_type} competition with {num_participants} participants, the scores were recorded. Most participants scored between {score_low} and {score_high} points, but one exceptionally skilled participant scored {outlier_score} points. If the event organizer wants to report a 'typical' score that is not overly influenced by this one outstanding performance, which measure should they primarily consider: the mean or the median score?",
+    "options_template": [
+      "The mean, because it includes all data points.",
+      "The median, because it is less sensitive to extreme outliers.",
+      "Either, as both will be very similar.",
+      "The mode, as it represents the most common score."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "competition_type": {"type": "random_choice", "choices": ["archery", "chess", "coding", "baking"]},
+        "num_participants": {"type": "random_int_range", "min": 20, "max": 50},
+        "score_low": {"type": "random_int_range", "min": 50, "max": 70},
+        "score_high": {"type": "random_int_range", "min": 75, "max": 95},
+        "outlier_score": {"type": "random_int_range", "min": 150, "max": 250}
+    },
+    "explanation_template": "When a dataset has extreme outliers (like the {outlier_score} point), the mean can be heavily skewed. The median, being the middle value, is more resistant to such outliers and provides a better representation of the 'typical' score in this scenario."
+  },
+  {
+    "id": "STAT_U2_T2_S5_H_LR_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sampling from a finite population",
+    "subtopic_name": "Impact of Finite Population Correction on SE (Conceptual)",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A town has {N_town_pop} registered voters. A political pollster plans to survey {n_town_sample} voters. Another pollster is surveying voters in a large city with millions of voters, also planning to sample {n_town_sample} voters. Assuming all other factors (like variability in opinions) are similar, how would the standard error of the proportion for the town poll likely compare to the city poll, considering the finite population correction factor (FPC)?",
+    "options_template": [
+      "The town poll's standard error will be larger because the FPC increases it.",
+      "The town poll's standard error will be smaller because the FPC reduces it when sampling a large fraction of a finite population.",
+      "Both polls will have nearly identical standard errors as the sample size is the same.",
+      "The FPC is not applicable to proportions, only means."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "N_town_pop": {"type": "random_int_range", "min":1000, "max":5000},
+        "n_town_sample_ratio": {"type": "random_choice", "choices": [0.1, 0.15, 0.2]}, 
+        "n_town_sample": {"type": "calculate_n_from_N_ratio_int", "N_var": "N_town_pop", "ratio_var": "n_town_sample_ratio"}
+    },
+    "explanation_template": "The Finite Population Correction (FPC) = sqrt((N-n)/(N-1)). When n is a substantial fraction of N (as in the town poll where n/N = {n_town_sample}/{N_town_pop} ≈ {n_N_ratio_calc_fpc}), the FPC is noticeably less than 1, reducing the standard error. For the large city, n/N is very small, so FPC is close to 1 and has little effect."
+  },
+  {
+    "id": "STAT_U3_T4_S2_M_A_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Variance-covariance matrix",
+    "subtopic_name": "Calculating Variance of a Linear Combination",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "An investor has a portfolio with two stocks, A and B. Var(Return_A) = {var_A}, Var(Return_B) = {var_B}, and Cov(Return_A, Return_B) = {cov_AB}. If the investor allocates {weight_A_percent}% to Stock A and {weight_B_percent}% to Stock B, what is the variance of the portfolio's return (Var({weight_A_decimal}A + {weight_B_decimal}B))?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "variance_linear_combination_two_vars",
+        "params": ["weight_A_decimal", "weight_B_decimal", "var_A", "var_B", "cov_AB"]
+    },
+    "variable_generators": {
+        "var_A": {"type": "random_float_range", "min":0.01, "max":0.05, "decimals":3},
+        "var_B": {"type": "random_float_range", "min":0.01, "max":0.05, "decimals":3, "ensure_different_from":"var_A"},
+        "corr_AB_temp": {"type": "random_float_range", "min":-0.5, "max":0.8, "decimals":1},
+        "cov_AB": {"type": "calculate_cov_from_vars_corr", "var1":"var_A", "var2":"var_B", "corr_var":"corr_AB_temp"},
+        "weight_A_percent": {"type": "random_int_range_step", "min":20, "max":80, "step":10},
+        "weight_A_decimal": {"type": "percent_to_decimal", "source_var": "weight_A_percent"},
+        "weight_B_decimal": {"type": "calculate_one_minus_var", "source_var": "weight_A_decimal"},
+        "weight_B_percent": {"type": "decimal_to_percent", "source_var": "weight_B_decimal"}
+    },
+    "explanation_template": "Var(w₁A + w₂B) = w₁²Var(A) + w₂²Var(B) + 2w₁w₂Cov(A,B). Here, w₁={weight_A_decimal}, w₂={weight_B_decimal}. So, Var(Portfolio) = ({weight_A_decimal}² * {var_A}) + ({weight_B_decimal}² * {var_B}) + (2 * {weight_A_decimal} * {weight_B_decimal} * {cov_AB}) ≈ {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T6_S3_M_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Estimating the difference between two binomial distributions",
+    "subtopic_name": "Interpreting CI for Difference in Proportions",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A city conducted a survey in {year1} and found that {p1_percent}% of residents supported a new park. In {year2}, a similar survey found {p2_percent}% support. A 95% confidence interval for the difference in proportions (p_({year2}) - p_({year1})) was calculated as ({lower_diff_prop}, {upper_diff_prop}). What does this interval suggest about the change in support?",
+    "options_template": [
+      "Support for the park significantly increased from {year1} to {year2}.",
+      "Support for the park significantly decreased from {year1} to {year2}.",
+      "There is no statistically significant change in support between {year1} and {year2}.",
+      "The survey method must have been flawed."
+    ],
+    "answer_logic": {
+        "type": "interpret_ci_difference_proportions",
+        "params": ["lower_diff_prop", "upper_diff_prop"]
+    },
+    "variable_generators": {
+        "year1": {"type": "random_int_range", "min":2018, "max":2020},
+        "year2": {"type": "sum_vars_int", "vars_to_sum": ["year1", 2]},
+        "p1_percent_base": {"type": "random_int_range", "min":40, "max":60},
+        "p1_percent": {"type": "identity", "source_var": "p1_percent_base"},
+        "diff_scenario": {"type": "random_choice", "choices": ["increase", "decrease", "no_change"]},
+        "p2_percent": {"type": "generate_p2_for_diff_prop_scenario", "p1_var": "p1_percent_base", "scenario_var":"diff_scenario"},
+        "lower_diff_prop": {"type": "generate_ci_diff_prop_lower", "p1_perc_var":"p1_percent", "p2_perc_var":"p2_percent"},
+        "upper_diff_prop": {"type": "generate_ci_diff_prop_upper", "p1_perc_var":"p1_percent", "p2_perc_var":"p2_percent"}
+    },
+    "explanation_template": "If the CI ({lower_diff_prop}, {upper_diff_prop}) for (p_({year2}) - p_({year1})) contains 0, there's no significant change. If entirely positive, support increased. If entirely negative, support decreased. Based on the interval, {conclusion_text}."
+  },
+  {
+    "id": "STAT_U5_T1_S3_H_A_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "A large-sample test about the population mean",
+    "subtopic_name": "Calculating Test Statistic for Population Mean (Sigma Unknown, Large N)",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "A coffee shop owner claims their new espresso machine brews a cup in {mu0_brew_time} seconds on average. A sample of {n_brew_sample} brews has a mean of {x_bar_brew_time} seconds and a sample standard deviation of {s_brew_time} seconds. To test H₀: μ = {mu0_brew_time} vs H₁: μ ≠ {mu0_brew_time}, what is the value of the test statistic?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_t_or_z_stat_one_mean",
+        "params": ["x_bar_brew_time", "mu0_brew_time", "s_brew_time", "n_brew_sample"]
+    },
+    "variable_generators": {
+        "mu0_brew_time": {"type": "random_int_range", "min":25, "max":35},
+        "n_brew_sample": {"type": "random_int_range", "min":35, "max":100}, 
+        "s_brew_time": {"type": "random_float_range", "min":1.5, "max":5.0, "decimals":1},
+        "effect_direction": {"type": "random_choice", "choices":[-1, 1]},
+        "effect_size_brew": {"type": "random_float_range", "min":0.5, "max":2.0, "decimals":1},
+        "x_bar_brew_time": {"type": "calculate_x_bar_for_test_stat", "mu0_var":"mu0_brew_time", "s_var":"s_brew_time", "n_var":"n_brew_sample", "target_t_or_z": {"type":"multiply_vars_float", "var1":"effect_direction", "var2":"effect_size_brew"}}
+    },
+    "explanation_template": "For a large sample with unknown population std dev, we use t-statistic (or z as n is large): (x̄ - μ₀) / (s / √n). So, ({x_bar_brew_time} - {mu0_brew_time}) / ({s_brew_time} / √{n_brew_sample}) ≈ {correct_ans}."
+  },
+  {
+    "id": "STAT_U1_T1_S7_M_LR_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Describing data sets - percentiles and box-plots",
+    "subtopic_name": "Interpreting Boxplot Skewness",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A boxplot of customer waiting times at a {service_place} shows the median line significantly closer to the Q1 (25th percentile) box edge than to the Q3 (75th percentile) box edge, and the upper whisker is much longer than the lower whisker. This suggests the distribution of waiting times is:",
+    "options_template": [
+      "Approximately symmetric",
+      "Skewed to the right (positively skewed)",
+      "Skewed to the left (negatively skewed)",
+      "Bimodal"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "service_place": {"type": "random_choice", "choices": ["bank", "post office", "doctor's clinic"]}
+    },
+    "explanation_template": "When the median is closer to Q1 and the upper whisker/upper part of the box is elongated, it indicates a right-skewed (positively skewed) distribution, meaning longer waiting times are less frequent but stretch the distribution to the right."
+  },
+  {
+    "id": "STAT_U4_T6_S4_M_D_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Estimating the difference between two binomial distributions",
+    "subtopic_name": "Point Estimator for Difference in Proportions",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "To estimate the difference between the proportions of {group1_desc} (p1) and {group2_desc} (p2) who {activity_desc}, what is the appropriate point estimator for (p1 - p2)?",
+    "options_template": [
+      "The average of the two sample proportions ( (p̂1 + p̂2) / 2 )",
+      "The difference between the two sample proportions (p̂1 - p̂2)",
+      "The pooled sample proportion",
+      "The product of the two sample proportions (p̂1 * p̂2)"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "group1_desc": {"type": "random_choice", "choices": ["men", "urban residents", "students at University A"]},
+        "group2_desc": {"type": "random_choice_different", "choices": ["women", "rural residents", "students at University B"], "different_from_var": "group1_desc"},
+        "activity_desc": {"type": "random_choice", "choices": ["own a pet", "use public transport", "prefer online shopping"]}
+    },
+    "explanation_template": "The point estimator for the difference between two population proportions (p1 - p2) is the difference between their respective sample proportions (p̂1 - p̂2)."
+  },
+  {
+    "id": "STAT_U5_T2_S2_M_LR_001",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Statistical Test of hypothesis",
+    "subtopic_name": "Choosing Test Based on Parameter (Proportion vs Mean)",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A city council wants to determine if the proportion of residents in favor of a new recycling program is greater than {target_proportion_percent}%. They survey {num_surveyed_council} residents. Which type of statistical test is most appropriate for this scenario?",
+    "options_template": [
+      "A test for a population mean (e.g., t-test or z-test for mean)",
+      "A test for a population proportion (e.g., z-test for proportion)",
+      "A chi-square test for independence",
+      "An F-test for equality of variances"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "target_proportion_percent": {"type": "random_int_range_step", "min":50, "max":70, "step":5},
+        "num_surveyed_council": {"type": "random_int_range_step", "min":100, "max":500, "step":50}
+    },
+    "explanation_template": "Since the city council is interested in a proportion (percentage of residents in favor), a test for a population proportion is the appropriate statistical test."
+  },
+  {
+    "id": "STAT_U2_T5_S4_M_A_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Poisson distributions using normal distribution",
+    "subtopic_name": "Normal Approx. to Poisson - Probability Calc",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "The number of {event_type_poisson} occurring at a {location_poisson} per {time_unit_poisson} follows a Poisson distribution with a mean of λ = {lambda_val_poisson}. Using a normal approximation (with continuity correction), what is the approximate probability of observing more than {k_val_poisson} {event_type_poisson_plural} in one {time_unit_poisson}?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "normal_approx_poisson_gt", 
+        "params": ["lambda_val_poisson", "k_val_poisson"]
+    },
+    "variable_generators": {
+        "event_type_poisson": {"type": "random_choice", "choices": ["customer arrival", "website hit", "machine breakdown"]},
+        "event_type_poisson_plural": {"type": "plural_form", "source_var": "event_type_poisson"},
+        "location_poisson": {"type": "random_choice", "choices": ["checkout counter", "server", "factory floor"]},
+        "time_unit_poisson": {"type": "random_choice", "choices": ["minute", "hour", "day"]},
+        "lambda_val_poisson": {"type": "random_int_range", "min":20, "max":50}, 
+        "k_val_poisson": {"type": "random_int_near_lambda", "lambda_var": "lambda_val_poisson", "range_around": 5, "ensure_less_than_lambda": false}
+    },
+    "explanation_template": "For normal approximation to Poisson, μ=λ={lambda_val_poisson}, σ=sqrt(λ). P(X > {k_val_poisson}) is P(X ≥ {k_val_poisson}+1). Using continuity correction, this becomes P(Normal > {k_val_poisson}+0.5). Z = (({k_val_poisson}+0.5) - {lambda_val_poisson}) / sqrt({lambda_val_poisson}). The probability is ≈ {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T6_S5_H_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Estimating the difference between two binomial distributions",
+    "subtopic_name": "Misleading Comparison without CI",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A political campaign manager finds that in City A, {prop_A_percent}% of {n_A_sample} surveyed voters support their candidate, while in City B, {prop_B_percent}% of {n_B_sample} surveyed voters support the candidate. The manager triumphantly declares significantly higher support in City {city_with_higher_prop_name}. Why might this declaration be premature or statistically unsound without further analysis like a confidence interval for the difference or a hypothesis test?",
+    "options_template": [
+      "Because City A's population is larger.",
+      "Because the sample proportions ({prop_A_percent}% and {prop_B_percent}%) might differ due to random sampling variability, even if true population proportions are similar.",
+      "Because the surveys were conducted on different days.",
+      "Because percentages are always misleading in political polls."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "n_A_sample": {"type": "random_int_range_step", "min":400, "max":600, "step":50},
+        "n_B_sample": {"type": "random_int_range_step", "min":400, "max":600, "step":50},
+        "base_prop_A": {"type": "random_float_range", "min":0.45, "max":0.55, "decimals":2},
+        "base_prop_B_diff": {"type": "random_float_range", "min":0.01, "max":0.06, "decimals":2},
+        "scenario_higher": {"type": "random_choice", "choices": ["A_higher", "B_higher"]},
+        "prop_A_actual": {"type": "conditional_prop_scenario", "scenario_var":"scenario_higher", "base_var":"base_prop_A", "other_base_var":"base_prop_B_diff", "condition_for_base":"A_higher"},
+        "prop_B_actual": {"type": "conditional_prop_scenario", "scenario_var":"scenario_higher", "base_var":"base_prop_A", "other_base_var":"base_prop_B_diff", "condition_for_base":"B_higher"},
+        "prop_A_percent": {"type": "decimal_to_percent_str", "source_var": "prop_A_actual"},
+        "prop_B_percent": {"type": "decimal_to_percent_str", "source_var": "prop_B_actual"},
+        "city_with_higher_prop_name": {"type": "city_name_based_on_higher_prop", "prop_A_var":"prop_A_actual", "prop_B_var":"prop_B_actual", "name_A":"A", "name_B":"B"}
+    },
+    "explanation_template": "Observed sample proportions can differ due to chance (sampling error) even if the true population proportions are equal or very close. A confidence interval for the difference (p_A - p_B) or a hypothesis test is needed to assess if the observed difference is statistically significant or likely due to random variation."
+  },
+  {
+    "id": "STAT_U1_T3_S1_E_D_002",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Summarising data sets - Sample Mean",
+    "subtopic_name": "Calculating Sample Mean (Simple)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "Calculate the sample mean for the following dataset: {dataset_str_mean}.",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_mean",
+        "params": ["dataset_arr_mean"]
+    },
+    "variable_generators": {
+        "dataset_size_mean": {"type": "random_int_range", "min": 3, "max": 5},
+        "dataset_arr_mean": {"type": "generate_int_array", "size_var": "dataset_size_mean", "min_val": 5, "max_val": 20},
+        "dataset_str_mean": {"type": "array_to_string", "source_var": "dataset_arr_mean"}
+    },
+    "explanation_template": "To find the sample mean, sum all the values and divide by the number of values. Sum = {sum_of_values}, Count = {dataset_size_mean}. Mean = {sum_of_values} / {dataset_size_mean} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U1_T4_S1_E_D_003",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Summarising data sets - sample variance",
+    "subtopic_name": "Range Calculation",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is the range of the dataset: {dataset_str_range}?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "calculate_range",
+        "params": ["dataset_arr_range"]
+    },
+    "variable_generators": {
+        "dataset_size_range": {"type": "random_int_range", "min": 4, "max": 7},
+        "dataset_arr_range": {"type": "generate_int_array", "size_var": "dataset_size_range", "min_val": 1, "max_val": 50},
+        "dataset_str_range": {"type": "array_to_string", "source_var": "dataset_arr_range"}
+    },
+    "explanation_template": "The range is the difference between the maximum and minimum values in the dataset. Max = {max_val_range}, Min = {min_val_range}. Range = {max_val_range} - {min_val_range} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T2_S1_E_D_003",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sample Mean",
+    "subtopic_name": "Symbol for Sample Mean",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "Which symbol is commonly used to represent the sample mean?",
+    "options_template": ["μ (mu)", "σ (sigma)", "x̄ (x-bar)", "p̂ (p-hat)"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "x̄ (x-bar) is the standard notation for the sample mean. μ represents the population mean."
+  },
+  {
+    "id": "STAT_U2_T2_S2_E_D_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sample Variance",
+    "subtopic_name": "Symbol for Sample Variance",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "The symbol s² typically represents which statistical measure?",
+    "options_template": ["Population variance", "Sample standard deviation", "Sample variance", "Population mean"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "s² is the common notation for sample variance. σ² represents population variance, and 's' represents sample standard deviation."
+  },
+  {
+    "id": "STAT_U3_T1_S1_E_D_002",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Correlation",
+    "subtopic_name": "Range of Correlation Coefficient",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "The Pearson correlation coefficient (r) always falls within what range?",
+    "options_template": ["0 to 1", "-1 to +1", "-∞ to +∞", "0 to ∞"],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "The Pearson correlation coefficient (r) ranges from -1 (perfect negative linear correlation) to +1 (perfect positive linear correlation). A value of 0 indicates no linear correlation."
+  },
+  {
+    "id": "STAT_U4_T3_S1_E_D_002",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Point estimation",
+    "subtopic_name": "Definition of a Point Estimate",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is a point estimate?",
+    "options_template": [
+      "A range of values used to estimate a population parameter.",
+      "A single numerical value used to estimate a population parameter.",
+      "The standard deviation of the sampling distribution.",
+      "A hypothesis about the population parameter."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "A point estimate is a single value (statistic) calculated from sample data that serves as the best guess or estimate of an unknown population parameter."
+  },
+  {
+    "id": "STAT_U5_T1_S1_E_D_002",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Testing of hypothesis about population parameters",
+    "subtopic_name": "Definition of Null Hypothesis (H₀)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "In hypothesis testing, what does the null hypothesis (H₀) generally represent?",
+    "options_template": [
+      "The researcher's claim or the effect they want to prove.",
+      "A statement of no effect, no difference, or the status quo.",
+      "The probability of observing the sample data.",
+      "The range of plausible values for the parameter."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "The null hypothesis (H₀) is a statement of no effect or no difference, representing the status quo that the statistical test aims to provide evidence against."
+  },
+  {
+    "id": "STAT_U1_T3_S2_E_D_002",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Summarising data sets - sample median",
+    "subtopic_name": "Finding Median (Odd number of points, sorted)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is the median of the sorted dataset: {sorted_dataset_str_median}?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "find_median_sorted_odd", 
+        "params": ["sorted_dataset_arr_median"]
+    },
+    "variable_generators": {
+        "sorted_dataset_arr_median": {"type": "generate_sorted_int_array", "size": 5, "min_val": 10, "max_val": 50, "step_min": 2, "step_max": 5},
+        "sorted_dataset_str_median": {"type": "array_to_string", "source_var": "sorted_dataset_arr_median"}
+    },
+    "explanation_template": "For a sorted dataset with an odd number of values, the median is the middle value. In {sorted_dataset_str_median}, the median is {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T5_S1_E_D_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial distributions",
+    "subtopic_name": "Key Parameter 'n' in Binomial",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "In a binomial distribution B(n, p), what does 'n' represent?",
+    "options_template": [
+      "The probability of success on a single trial.",
+      "The number of independent trials.",
+      "The number of successes in n trials.",
+      "The expected number of successes."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "'n' in a binomial distribution represents the fixed number of independent Bernoulli trials."
+  },
+  {
+    "id": "STAT_U2_T5_S1_E_D_003",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Poisson distributions",
+    "subtopic_name": "Key Parameter 'λ' (lambda) in Poisson",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "In a Poisson distribution P(λ), what does 'λ' (lambda) represent?",
+    "options_template": [
+      "The number of trials.",
+      "The probability of success in one interval.",
+      "The average rate of events occurring in a fixed interval of time or space.",
+      "The standard deviation of the number of events."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "Lambda (λ) in a Poisson distribution represents the average number of events (the mean rate) occurring in a specific interval of time or space."
+  },
+  {
+    "id": "STAT_U4_T5_S1_E_D_002",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Interpreting the confidence interval",
+    "subtopic_name": "Confidence Level Definition",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "If a 95% confidence interval is constructed, what does the '95%' refer to?",
+    "options_template": [
+      "The probability that the sample mean is correct.",
+      "The percentage of the population captured by the interval.",
+      "The confidence that if many samples were taken, 95% of the intervals constructed would contain the true population parameter.",
+      "The width of the interval."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "The 95% confidence level indicates that if the sampling process were repeated many times, approximately 95% of the confidence intervals constructed would capture the true population parameter."
+  },
+  {
+    "id": "STAT_U5_T3_S1_E_D_002",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "calculating the p-value",
+    "subtopic_name": "P-value Definition",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is the p-value in hypothesis testing?",
+    "options_template": [
+      "The probability that the null hypothesis is true.",
+      "The probability of observing a test statistic as extreme as, or more extreme than, the one calculated from the sample, assuming the null hypothesis is true.",
+      "The significance level chosen by the researcher.",
+      "The probability of making a Type II error."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "The p-value is the probability of obtaining test results at least as extreme as the results actually observed, under the assumption that the null hypothesis is correct."
+  },
+  {
+    "id": "STAT_U1_T1_S1_E_D_003",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Frequency tables and graphs",
+    "subtopic_name": "Purpose of Frequency Table",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is the primary purpose of a frequency table for a dataset like scores on a quiz: {example_scores_str}?",
+    "options_template": [
+        "To calculate the average score.",
+        "To show how often each score or group of scores occurs.",
+        "To determine the range of scores.",
+        "To identify outliers in the scores."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "example_scores_arr": {"type":"generate_int_array", "size":5, "min_val":60, "max_val":95},
+        "example_scores_str": {"type":"array_to_string", "source_var":"example_scores_arr"}
+    },
+    "explanation_template": "A frequency table organizes data by listing each distinct value (or class interval) and the number of times (frequency) it occurs in the dataset, providing a summary of the distribution."
+  },
+  {
+    "id": "STAT_U3_T6_S1_E_D_002",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Central Limit Theorem",
+    "subtopic_name": "CLT Basic Condition (Sample Size)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "The Central Limit Theorem (CLT) generally applies when the sample size (n) is:",
+    "options_template": [
+      "Small (e.g., n < 10)",
+      "Equal to the population size",
+      "Sufficiently large (e.g., n ≥ 30)",
+      "Less than 5% of the population size"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "The Central Limit Theorem states that the sampling distribution of the sample mean will be approximately normal if the sample size is sufficiently large, often taken as n ≥ 30 as a rule of thumb."
+  },
+  {
+    "id": "STAT_U4_T2_S1_E_D_002",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Types of Estimators",
+    "subtopic_name": "Consistent Estimator Property",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "An estimator is said to be 'consistent' if:",
+    "options_template": [
+      "It has the smallest variance among all unbiased estimators.",
+      "Its value is always equal to the true population parameter.",
+      "As the sample size increases, the estimator gets closer to the true population parameter.",
+      "Its expected value is zero."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "A consistent estimator is one for which the probability of the estimate being close to the true parameter value approaches 1 as the sample size increases indefinitely."
+  },
+  {
+    "id": "STAT_U5_T4_S1_E_D_002",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "power of a statistical test",
+    "subtopic_name": "Power Definition (Simple)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "The 'power' of a statistical test refers to its ability to:",
+    "options_template": [
+      "Correctly fail to reject a true null hypothesis.",
+      "Always yield a significant result.",
+      "Correctly reject a false null hypothesis.",
+      "Minimize the sample size needed."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "Power (1-β) is the probability that the test will correctly reject the null hypothesis when the null hypothesis is actually false (i.e., detect an effect when there is one)."
+  },
+  {
+    "id": "STAT_U1_T3_S3_E_D_001",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Summarising data sets - sample mode",
+    "subtopic_name": "Identifying Mode from Small Dataset",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is the mode of the dataset: {dataset_str_mode}?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor_no_mode_option}"],
+    "answer_logic": {
+        "type": "find_mode_simple",
+        "params": ["dataset_arr_mode"]
+    },
+    "variable_generators": {
+        "mode_val": {"type": "random_int_range", "min":1, "max":10},
+        "num_mode_val": {"type": "random_int_range", "min":2, "max":3},
+        "other_vals_count": {"type": "random_int_range", "min":2, "max":3},
+        "dataset_arr_mode_unshuffled": {"type": "generate_array_with_mode_val", "mode_val_var":"mode_val", "mode_freq_var":"num_mode_val", "other_vals_count_var":"other_vals_count", "other_min":1, "other_max":10},
+        "dataset_arr_mode": {"type": "shuffle_array", "source_var": "dataset_arr_mode_unshuffled"},
+        "dataset_str_mode": {"type": "array_to_string", "source_var": "dataset_arr_mode"}
+    },
+    "explanation_template": "The mode is the value that appears most frequently. In the dataset {dataset_str_mode}, the value {correct_ans_val} appears {mode_frequency_val} times, which is more than any other value."
+  },
+  {
+    "id": "STAT_U3_T2_S1_E_D_002",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Covariance",
+    "subtopic_name": "Sign of Covariance and Relationship Direction",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "If the covariance between two variables, amount of rainfall (X) and umbrella sales (Y), is positive (Cov(X,Y) > 0), what does this generally suggest?",
+    "options_template": [
+      "As rainfall increases, umbrella sales tend to decrease.",
+      "As rainfall increases, umbrella sales tend to increase.",
+      "There is no relationship between rainfall and umbrella sales.",
+      "Rainfall causes umbrella sales."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {},
+    "explanation_template": "A positive covariance suggests that as one variable increases, the other variable tends to increase as well, indicating a positive linear association."
+  },
+  {
+    "id": "STAT_U4_T5_S1_M_D_003",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Interval Estimation - Constructing a confidence interval",
+    "subtopic_name": "Components of a Confidence Interval Formula (Mean)",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "A confidence interval for a population mean (μ) when the population standard deviation (σ) is known is typically calculated as: Sample Mean ± Margin of Error. The Margin of Error is given by:",
+    "options_template": [
+      "z * (σ / n)",
+      "t * (s / √n)",
+      "z * (σ / √n)",
+      "Sample Standard Deviation"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "When σ is known, the margin of error for a CI for μ is z * (σ / √n), where z is the critical value from the standard normal distribution corresponding to the confidence level, σ is the population standard deviation, and n is the sample size."
+  },
+  {
+    "id": "STAT_U5_T7_S1_E_D_002",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Some comments on testing of hypothesis",
+    "subtopic_name": "Outcome of Hypothesis Test (Not Acceptance)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "When a p-value is greater than the significance level (α) in a hypothesis test, the correct statistical conclusion is to:",
+    "options_template": [
+      "Accept the null hypothesis (H₀).",
+      "Reject the null hypothesis (H₀).",
+      "Fail to reject the null hypothesis (H₀).",
+      "Accept the alternative hypothesis (H₁)."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "Statistically, we do not 'accept' the null hypothesis. If the p-value > α, we conclude that there is not enough evidence to reject the null hypothesis, so we 'fail to reject H₀'."
+  },
+   {
+    "id": "STAT_U2_T4_S3_E_D_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Normal Distribution (Properties and Applications)",
+    "subtopic_name": "Z-score Interpretation (Below Mean)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "If a data point has a z-score of -{abs_z_value}, it means the data point is:",
+    "options_template": [
+      "{abs_z_value} standard deviations below the mean.",
+      "{abs_z_value} standard deviations above the mean.",
+      "Exactly at the mean.",
+      "An outlier."
+    ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 0 },
+    "variable_generators": {
+        "abs_z_value": {"type": "random_choice", "choices": [1, 1.5, 2, 2.5]}
+    },
+    "explanation_template": "A negative z-score indicates the data point is below the mean. The magnitude ({abs_z_value}) indicates how many standard deviations away."
+  },
+  {
+    "id": "STAT_U2_T4_S3_E_D_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Normal Distribution (Properties and Applications)",
+    "subtopic_name": "Probability with Empirical Rule (1 SD)",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "In a normal distribution, approximately what percentage of the data lies within ±1 standard deviation of the mean?",
+    "options_template": ["34%", "68%", "95%", "99.7%"],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 1 },
+    "variable_generators": {},
+    "explanation_template": "The Empirical Rule states that approximately 68% of data in a normal distribution falls within one standard deviation of the mean."
+  },
+  {
+    "id": "STAT_U2_T5_S1_M_D_004",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial Distribution",
+    "subtopic_name": "Mean of Binomial Distribution",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "For a binomial distribution with {n_trials_binom_mean} trials and a probability of success p = {p_binom_mean}, what is the mean (expected number of successes)?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+      "type": "calculate_binomial_mean", 
+      "params": ["n_trials_binom_mean", "p_binom_mean"]
+    },
+    "variable_generators": {
+      "n_trials_binom_mean": {"type": "random_int_range", "min": 10, "max": 100},
+      "p_binom_mean": {"type": "random_float_range", "min": 0.1, "max": 0.9, "decimals": 2}
+    },
+    "explanation_template": "The mean of a binomial distribution is n*p. So, Mean = {n_trials_binom_mean} * {p_binom_mean} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T5_S1_M_D_005",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Poisson Distribution",
+    "subtopic_name": "Variance of Poisson Distribution",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "If the number of events follows a Poisson distribution with a mean rate λ = {lambda_poisson_var}, what is the variance of this distribution?",
+    "options_template": ["{lambda_poisson_var}", "sqrt({lambda_poisson_var})", "{lambda_poisson_var_sq}", "1/{lambda_poisson_var}"],
+    "answer_logic": { "type": "fixed_choice_dynamic_option", "correct_option_template_index":0 },
+    "variable_generators": {
+        "lambda_poisson_var": {"type": "random_int_range", "min": 2, "max": 10},
+        "lambda_poisson_var_sq": {"type": "square_value", "source_var": "lambda_poisson_var"}
+    },
+    "explanation_template": "For a Poisson distribution, the variance is equal to its mean (λ). So, Variance = {lambda_poisson_var}."
+  },
+  {
+    "id": "STAT_U2_T1_S1_E_D_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Types of sampling",
+    "subtopic_name": "When is Simple Random Sampling Appropriate?",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "Simple Random Sampling is most effective when the population is:",
+    "options_template": [
+        "Large and heterogeneous",
+        "Small and homogeneous",
+        "Geographically dispersed",
+        "Divided into distinct strata"
+    ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 1 },
+    "variable_generators": {},
+    "explanation_template": "Simple random sampling is easiest to implement and works well when the population is relatively small and homogeneous, and a complete list of individuals is available."
+  },
+  {
+    "id": "STAT_U2_T3_S1_M_D_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sampling Distributions",
+    "subtopic_name": "Standard Error Definition",
+    "difficulty_level": "medium",
+    "difficulty_type": "direct",
+    "question_template": "The standard deviation of a sampling distribution of a statistic (like the sample mean) is known as its:",
+    "options_template": [
+      "Standard error",
+      "Population standard deviation",
+      "Sample variance",
+      "Range"
+    ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 0 },
+    "variable_generators": {},
+    "explanation_template": "The standard error measures the variability of a sample statistic if repeated samples were taken from the population. It is the standard deviation of the sampling distribution of that statistic."
+  },
+  {
+    "id": "STAT_U2_T4_S1_M_A_003",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Normal Distribution (Properties and Applications)",
+    "subtopic_name": "Finding Value from Z-score (Word Problem)",
+    "style": "word_problem",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "The scores on a national aptitude test are normally distributed with a mean of {mean_score_test} and a standard deviation of {std_dev_test}. If a student's z-score is {z_score_val}, what was their actual test score?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+      "type": "calculate_x_from_z_word_problem", 
+      "params": ["mean_score_test", "std_dev_test", "z_score_val"]
+    },
+    "variable_generators": {
+      "mean_score_test": {"type": "random_int_range", "min": 400, "max": 600, "step":10},
+      "std_dev_test": {"type": "random_int_range", "min": 50, "max": 100, "step":10},
+      "z_score_val": {"type": "random_choice", "choices": [-1.5, -0.5, 0.8, 1.2, 2.0]}
+    },
+    "explanation_template": "Actual Score = Mean + (Z-score * Standard Deviation). So, Score = {mean_score_test} + ({z_score_val} * {std_dev_test}) = {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T5_S1_M_A_002",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial Distribution",
+    "subtopic_name": "Binomial Variance Calculation",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "In a series of {n_trials_binom_var} independent Bernoulli trials, the probability of success on each trial is {p_binom_var}. What is the variance of the number of successes?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_binomial_variance",
+        "params": ["n_trials_binom_var", "p_binom_var"]
+    },
+    "variable_generators": {
+        "n_trials_binom_var": {"type": "random_int_range", "min": 10, "max": 50},
+        "p_binom_var": {"type": "random_float_range", "min": 0.2, "max": 0.8, "decimals": 2}
+    },
+    "explanation_template": "The variance of a binomial distribution is np(1-p). So, Variance = {n_trials_binom_var} * {p_binom_var} * (1 - {p_binom_var}) = {correct_ans}."
+  },
+  {
+    "id": "STAT_U2_T5_S3_H_LR_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Poisson distributions using normal distribution",
+    "subtopic_name": "When is Normal Approx to Poisson Justified?",
+    "difficulty_level": "hard",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A quality control process checks for defects in rolls of fabric. The average number of defects per roll is λ = {lambda_approx_check}. Under what condition is it generally acceptable to use a normal distribution to approximate the Poisson distribution for the number of defects?",
+    "options_template": [
+      "When λ is very small (e.g., λ < 1)",
+      "When λ is moderately large (e.g., λ ≥ 10 or λ ≥ 20)",
+      "Only if the defects are not independent",
+      "It is never appropriate to use normal to approximate Poisson"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "lambda_approx_check": {"type": "random_choice", "choices": [3, 15, 25]}
+    },
+    "explanation_template": "The normal distribution can be used to approximate the Poisson distribution when its mean λ is sufficiently large (rules of thumb vary, e.g., λ ≥ 10, λ ≥ 15, or λ ≥ 20). For λ = {lambda_approx_check}, this condition is {is_or_is_not} met."
+  },
+  {
+    "id": "STAT_U2_T1_S5_E_D_001",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Types of sampling",
+    "subtopic_name": "Convenience Sampling Disadvantage",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "What is a primary disadvantage of convenience sampling?",
+    "options_template": [
+        "It is too expensive.",
+        "It requires a complete list of the population.",
+        "The sample is often not representative of the population.",
+        "It is too time-consuming."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 2},
+    "variable_generators": {},
+    "explanation_template": "Convenience sampling involves selecting individuals who are easiest to reach, which often leads to a sample that is biased and not representative of the broader population."
+  },
+   {
+    "id": "STAT_U2_T2_S1_E_D_004", 
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Sample Mean (Sampling Distribution Context)",
+    "subtopic_name": "E(x-bar) Property",
+    "difficulty_level": "easy",
+    "difficulty_type": "direct",
+    "question_template": "If x̄ is the sample mean from a random sample, what is the expected value of x̄, denoted E(x̄)?",
+    "options_template": [
+      "μ (population mean)",
+      "σ (population standard deviation)",
+      "σ² (population variance)",
+      "0"
+    ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 0 },
+    "variable_generators": {},
+    "explanation_template": "The expected value of the sample mean E(x̄) is equal to the population mean μ, meaning the sample mean is an unbiased estimator of the population mean."
+  },
+  {
+    "id": "STAT_U2_T5_S1_M_A_003",
+    "unit_name": "Unit-II Sampling and Distributions",
+    "topic_name": "Binomial Distribution",
+    "subtopic_name": "Probability of At Least One Success (Binomial)",
+    "style": "word_problem",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A basketball player makes {success_rate_percent}% of their free throws. If they attempt {num_attempts_ft} free throws independently, what is the probability they make at least one free throw?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_binomial_at_least_one",
+        "params": ["num_attempts_ft", "prob_success_ft"]
+    },
+    "variable_generators": {
+        "success_rate_percent": {"type": "random_int_range_step", "min": 60, "max": 90, "step": 5},
+        "prob_success_ft": {"type": "percent_to_decimal", "source_var": "success_rate_percent"},
+        "num_attempts_ft": {"type": "random_int_range", "min": 2, "max": 5}
+    },
+    "explanation_template": "P(at least one success) = 1 - P(zero successes). P(zero successes) = (1-p)^n = (1-{prob_success_ft})^{num_attempts_ft} = {prob_zero_successes}. So, P(at least one) = 1 - {prob_zero_successes} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U1_T4_S1_M_LR_002",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Variance and Dispersion",
+    "subtopic_name": "Interpreting Standard Deviation",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "If dataset A has a standard deviation of {std_A} and dataset B has a standard deviation of {std_B} ({std_A} < {std_B}), what does this imply about the datasets, assuming they measure the same variable on a similar scale?",
+    "options_template": [
+        "Dataset A is more spread out than Dataset B.",
+        "Dataset B is more spread out (more variability) than Dataset A.",
+        "Both datasets have the same mean.",
+        "Dataset A has more outliers than Dataset B."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "std_A": {"type": "random_int_range", "min": 2, "max": 5},
+        "std_B": {"type": "random_int_range", "min": 8, "max": 15}
+    },
+    "explanation_template": "A larger standard deviation ({std_B}) indicates greater variability or dispersion of data points around the mean compared to a smaller standard deviation ({std_A})."
+  },
+  {
+    "id": "STAT_U1_T3_S1_M_A_002",
+    "unit_name": "Unit-I Descriptive Statistics",
+    "topic_name": "Summarising data sets - Sample Mean",
+    "subtopic_name": "Weighted Mean Calculation",
+    "style": "word_problem",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A student scored {score1} on a test worth {weight1_percent}% of the final grade, and {score2} on another test worth {weight2_percent}%. What is their weighted average score for these two tests?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "calculate_weighted_mean_two_values",
+        "params": ["score1", "weight1_decimal", "score2", "weight2_decimal"]
+    },
+    "variable_generators": {
+        "score1": {"type": "random_int_range", "min": 60, "max": 95},
+        "score2": {"type": "random_int_range", "min": 60, "max": 95, "ensure_different_from":"score1"},
+        "weight1_percent": {"type": "random_int_range_step", "min": 20, "max": 80, "step":10},
+        "weight1_decimal": {"type": "percent_to_decimal", "source_var":"weight1_percent"},
+        "weight2_percent_calc": {"type": "subtract_from_constant", "constant":100, "subtract_var":"weight1_percent"},
+        "weight2_percent": {"type":"identity", "source_var":"weight2_percent_calc"},
+        "weight2_decimal": {"type": "percent_to_decimal", "source_var":"weight2_percent"}
+    },
+    "explanation_template": "Weighted Avg = (Score1 * Weight1 + Score2 * Weight2) / (Weight1 + Weight2). Here, ({score1}*{weight1_decimal} + {score2}*{weight2_decimal}) / ({weight1_decimal}+{weight2_decimal}) = {correct_ans}."
+  },
+  {
+    "id": "STAT_U3_T1_S1_M_LR_002",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Correlation",
+    "subtopic_name": "Correlation vs. Causation (Word Problem)",
+    "style": "word_problem",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "Researchers found a strong positive correlation between ice cream sales and the number of {event_correlated} in a city over several months. Does this mean eating ice cream causes more {event_correlated_plural}?",
+    "options_template": [
+      "Yes, the strong correlation proves causation.",
+      "No, correlation does not imply causation; a third variable (like warm weather) might be influencing both.",
+      "Yes, but only if the correlation coefficient is above 0.9.",
+      "No, because ice cream sales cannot influence {event_correlated_plural}."
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "event_correlated": {"type": "random_choice", "choices": ["drowning incident", "shark attack", "heatstroke case"]},
+        "event_correlated_plural": {"type": "plural_form", "source_var":"event_correlated"}
+    },
+    "explanation_template": "Correlation indicates an association between variables, but it does not prove that one variable causes the other. A lurking or confounding variable (like temperature) could be causing both to increase."
+  },
+   {
+    "id": "STAT_U3_T3_S2_M_A_001",
+    "unit_name": "Unit-III Correlation, Covariance and Independent Random Variables",
+    "topic_name": "Sums of independent random variables",
+    "subtopic_name": "Mean of Sum of Variables",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "Two random variables X and Y have means E(X) = {mean_x_sum} and E(Y) = {mean_y_sum}. What is the mean of their sum, E(X+Y)?",
+    "options_template": ["{option_correct}", "{option_distractor1}", "{option_distractor2}", "{option_distractor3}"],
+    "answer_logic": {
+        "type": "mean_sum_vars",
+        "params": ["mean_x_sum", "mean_y_sum"]
+    },
+    "variable_generators": {
+        "mean_x_sum": {"type": "random_int_range", "min": 5, "max": 20},
+        "mean_y_sum": {"type": "random_int_range", "min": -10, "max": 10}
+    },
+    "explanation_template": "The mean of the sum of two random variables is the sum of their means: E(X+Y) = E(X) + E(Y) = {mean_x_sum} + {mean_y_sum} = {correct_ans}."
+  },
+  {
+    "id": "STAT_U4_T2_S1_M_LR_001",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Types of Estimators (Properties)",
+    "subtopic_name": "Efficiency of Estimators",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "If Estimator A and Estimator B are both unbiased for the same population parameter, and Var(A) < Var(B), which estimator is considered more efficient?",
+    "options_template": [
+        "Estimator A",
+        "Estimator B",
+        "Both are equally efficient",
+        "Efficiency cannot be determined from variance alone"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 0},
+    "variable_generators": {},
+    "explanation_template": "Among unbiased estimators, the one with the smaller variance is considered more efficient because its estimates are, on average, closer to the true parameter value."
+  },
+  {
+    "id": "STAT_U4_T5_S1_H_A_002",
+    "unit_name": "Unit-IV Large Sample Estimation",
+    "topic_name": "Constructing a confidence interval, Large-Sample Confidence Interval for a Population Mean",
+    "subtopic_name": "Finding Sample Mean from CI",
+    "style": "word_problem",
+    "difficulty_level": "hard",
+    "difficulty_type": "aptitude",
+    "question_template": "A {conf_level_ci_find_mean}% confidence interval for the average assembly time of a {product_ci_find_mean} is [{lower_bound_ci_find_mean} minutes, {upper_bound_ci_find_mean} minutes]. What was the sample mean assembly time used to construct this interval?",
+    "options_template": ["{option_correct_str}", "{option_distractor1_str}", "{option_distractor2_str}", "{option_distractor3_str}"],
+    "answer_logic": {
+        "type": "find_mean_from_ci",
+        "params": ["lower_bound_ci_find_mean", "upper_bound_ci_find_mean"]
+    },
+    "variable_generators": {
+        "conf_level_ci_find_mean": {"type": "random_choice", "choices": [90, 95, 99]},
+        "product_ci_find_mean": {"type": "random_choice", "choices": ["toy car", "widget", "gadget"]},
+        "actual_sample_mean_fm": {"type": "random_float_range", "min":10.0, "max":30.0, "decimals":1},
+        "margin_error_fm": {"type": "random_float_range", "min":1.0, "max":5.0, "decimals":1},
+        "lower_bound_ci_find_mean": {"type": "subtract_vars", "var1":"actual_sample_mean_fm", "var2":"margin_error_fm"},
+        "upper_bound_ci_find_mean": {"type": "sum_vars", "vars_to_sum":["actual_sample_mean_fm", "margin_error_fm"]}
+    },
+    "explanation_template": "The sample mean is the midpoint of a symmetric confidence interval. Sample Mean = (Lower Bound + Upper Bound) / 2 = ({lower_bound_ci_find_mean} + {upper_bound_ci_find_mean}) / 2 = {correct_ans}."
+  },
+  {
+    "id": "STAT_U5_T1_S1_M_LR_002",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Testing of hypothesis about population parameters",
+    "subtopic_name": "Choosing Null/Alternative for a Claim",
+    "style": "word_problem",
+    "difficulty_level": "medium",
+    "difficulty_type": "logical reasoning",
+    "question_template": "A restaurant manager believes that the average customer satisfaction score (on a 1-10 scale) has increased from last year's average of {last_year_avg_score}. To test this, what would be the appropriate null (H₀) and alternative (H₁) hypotheses?",
+    "options_template": [
+      "H₀: μ = {last_year_avg_score}, H₁: μ ≠ {last_year_avg_score}",
+      "H₀: μ ≤ {last_year_avg_score}, H₁: μ > {last_year_avg_score}",
+      "H₀: μ ≥ {last_year_avg_score}, H₁: μ < {last_year_avg_score}",
+      "H₀: μ > {last_year_avg_score}, H₁: μ ≤ {last_year_avg_score}"
+    ],
+    "answer_logic": {"type": "fixed_choice", "correct_option_index": 1},
+    "variable_generators": {
+        "last_year_avg_score": {"type": "random_float_range", "min":6.5, "max":8.0, "decimals":1}
+    },
+    "explanation_template": "The manager wants to find evidence for an *increase*. The null hypothesis (H₀) represents 'no change or less', and the alternative (H₁) represents the claim of an increase. Thus, H₀: μ ≤ {last_year_avg_score} (or μ = {last_year_avg_score}) and H₁: μ > {last_year_avg_score}."
+  },
+   {
+    "id": "STAT_U5_T4_S1_M_A_002",
+    "unit_name": "Unit-V Hypothesis Testing",
+    "topic_name": "Two types of errors",
+    "subtopic_name": "Consequence of Type I Error (Scenario)",
+    "difficulty_level": "medium",
+    "difficulty_type": "aptitude",
+    "question_template": "A pharmaceutical company is testing a new drug. H₀: The drug has no effect. H₁: The drug has an effect. If they commit a Type I error, what is the consequence?",
+    "options_template": [
+      "They conclude the drug has no effect when it actually does.",
+      "They conclude the drug has an effect when it actually does not.",
+      "They correctly conclude the drug has an effect.",
+      "They correctly conclude the drug has no effect."
+    ],
+    "answer_logic": { "type": "fixed_choice", "correct_option_index": 1 },
+    "variable_generators": {},
+    "explanation_template": "A Type I error is rejecting a true null hypothesis. In this case, rejecting 'H₀: Drug has no effect' when it's true means concluding the drug has an effect when it doesn't."
+  }
+]

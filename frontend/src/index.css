@@ -1,0 +1,25 @@
+/* In frontend/src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap');
+
+/* --- CSS Variables for consistent branding --- */
+:root {
+  --primary-color: #696CFF;
+  --primary-color-dark: #5f61e8;
+  --background-color: #f5f5f9;
+  --form-bg-color: #ffffff;
+  --text-color: #697a8d;
+  --heading-color: #566a7f;
+  --border-color: #d9dee3;
+  --white-color: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}

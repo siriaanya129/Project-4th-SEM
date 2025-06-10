@@ -1,0 +1,35 @@
+/* Main container and header styles (mostly unchanged) */
+.pathwayContainer { margin-top: 2rem; text-align: center; }
+.pathwayHeader { margin-bottom: 2.5rem; }
+.pathwayHeader h3 { font-size: 1.5rem; color: var(--heading-color); margin: 0; }
+.pathwayHeader p { font-size: 1.1rem; color: var(--text-color); margin-top: 0.5rem; }
+.category { margin-top: 1rem; padding: 0.75rem; background-color: #e7e7ff; color: var(--primary-color); border-radius: 8px; font-weight: 600; display: inline-block; }
+.noPathMessage { font-size: 1.1rem; color: var(--text-color); }
+
+/* --- NEW HIERARCHY STYLES --- */
+.pathwayTree { display: flex; flex-direction: column; align-items: center; }
+.rootNode { background: var(--heading-color); color: var(--white-color); padding: 0.75rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1.2rem; margin-bottom: 2rem; }
+.horizontalConnector { width: 90%; height: 3px; background-color: var(--border-color); position: relative; }
+.horizontalConnector::before { content: ''; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%); width: 3px; height: 2rem; background-color: var(--border-color); }
+.unitsContainer { display: flex; justify-content: space-around; width: 100%; padding-top: 2rem; }
+.unitBranch { display: flex; flex-direction: column; align-items: center; position: relative; flex: 1; }
+.verticalConnector { width: 3px; height: 2rem; background-color: var(--border-color); position: absolute; top: -2rem; left: 50%; transform: translateX(-50%); }
+
+/* Base style for all nodes (Unit and Topic) */
+.unitNode, .topicNode { background: var(--white-color); border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px; width: 90%; max-width: 220px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.unitNode:hover, .topicNode:hover { transform: scale(1.05); border-color: var(--primary-color); }
+.nodeTitle { font-weight: 700; font-size: 1.1rem; color: var(--heading-color); }
+
+/* Topic Container (dropdown from Unit) */
+.topicsContainer { margin-top: 1rem; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1rem; position: relative; }
+.topicsContainer::before { content: ''; position: absolute; top: -1rem; left: 50%; transform: translateX(-50%); width: 3px; height: 1rem; background-color: var(--border-color); }
+.topicNode { background-color: #f8f9fa; }
+
+/* Subtopic Container (dropdown from Topic) */
+.subtopicsContainer { margin-top: 1rem; width: 100%; padding: 1rem; background: #f0f0f0; border-radius: 8px; display: flex; flex-direction: column; gap: 0.5rem; position: relative; }
+.subtopicsContainer::before { content: ''; position: absolute; top: -1rem; left: 50%; transform: translateX(-50%); width: 3px; height: 1rem; background-color: #e0e0e0; }
+.subtopicNode { padding: 0.5rem 1rem; font-weight: 500; text-align: center; border-radius: 6px; }
+
+/* Color coding for subtopics */
+.high-priority { background-color: #ffe8e8; color: #c92a2a; font-weight: 600; }
+.needs-review { background-color: #fff4e0; color: #e69500; font-weight: 600; }

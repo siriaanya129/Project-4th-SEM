@@ -1,0 +1,159 @@
+/* In frontend/src/components/Navbar.module.css */
+.navbar {
+  background-color: var(--white-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navContainer {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.navLogo img {
+  height: 40px;
+  margin-right: 12px;
+}
+
+.navMenu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+}
+
+.navItem a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navItem a:hover {
+  color: var(--primary-color);
+}
+
+.navButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.navButton:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.profileIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.featuresDropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    width: 600px; /* Wider dropdown */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    text-align: left;
+}
+.dropdownTitle {
+    grid-column: 1 / -1; /* Span across both columns */
+    margin: 0 0 1rem 0;
+    color: var(--heading-color);
+    font-size: 1.2rem;
+}
+.serviceCard {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+.serviceCard h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--heading-color);
+}
+.serviceCard p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.slidePanel {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 200px;
+  background-color: var(--white-color);
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+  z-index: 999;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.logoutButton {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}

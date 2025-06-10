@@ -1,0 +1,57 @@
+EL_Sem4/
+├── backend/                     # All Python backend code
+│   ├── app/                     # Main application package
+│   │   ├── __init__.py          # Makes 'app' a Python package
+│   │   ├── main.py              # FastAPI app initialization, main API routers
+│   │   ├── core_logic.py        # Core algorithms: LearningPathGenerator, DAA utils
+│   │   ├── syllabus_config.py   # SYLLABUS_TOPICS, QUESTION_TOPIC_MAP
+│   │   ├── models.py            # All Database models (SQLAlchemy)
+│   │   ├── schemas.py           # All Pydantic schemas for data validation
+│   │   ├── services.py          # Business logic services (student, quiz, auth)
+│   │   ├── ml_processing.py     # ML models (Random Forest, Anomaly Det.) & Chatbot logic
+│   │   ├── database.py          # Database engine, session, Base for models
+│   │   ├── auth_utils.py        # Security functions (passwords, JWT tokens)
+│   │   └── config.py            # Application configuration (settings)
+│   ├── venv/                    # Python virtual environment (should be in .gitignore)
+│   ├── requirements.txt         # Backend Python dependencies
+│   ├── alembic.ini              # (If using Alembic for migrations)
+│   ├── migrations/              # (If using Alembic)
+│   │   └── ...
+│   └── .env                     # Environment variables (DB_URL, SECRET_KEY, API keys)
+│
+├── frontend/                    # All ReactJS frontend code (structure remains similar)
+│   ├── public/
+│   │   └── ...
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/            # API call functions
+│   │   ├── contexts/            # State management
+│   │   ├── hooks/
+│   │   ├── routes/
+│   │   ├── styles/
+│   │   └── utils/
+│   ├── .env                     # Frontend environment variables
+│   ├── package.json
+│   ├── package-lock.json (or yarn.lock)
+│   └── README.md
+│
+├── data_initial/                # Initial data for populating DB
+│   └── student_quiz_data.json
+│
+└── README.md                    # Overall project documentation
+
+
+
+
+
+
+mongodb 
+username: educonnect_app
+password: lB9smL8LXRaBUthj
+
+
+connection string: mongodb+srv://educonnect_app:lB9smL8LXRaBUthj@cluster0.kwnyev7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

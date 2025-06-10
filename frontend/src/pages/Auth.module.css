@@ -1,0 +1,167 @@
+.authContainer {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.illustrationWrapper {
+  flex: 1;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.illustration {
+  max-width: 70%;
+  height: auto;
+}
+
+.formWrapper {
+  flex: 0 0 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--form-bg-color);
+  padding: 2rem;
+}
+
+.formBox {
+  width: 100%;
+  max-width: 350px;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.logoContainer img {
+  height: 35px;
+}
+
+.logoText {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+  position: relative; /* For positioning error messages */
+}
+
+.inputGroup label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.labelWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forgotLink {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.9rem;
+  margin-top: 1rem;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.authLink {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.authLink a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.privacyLink {
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.privacyLink:hover {
+  text-decoration: underline;
+}
+
+/* --- NEW STYLES FOR VALIDATION --- */
+.inputError {
+    border-color: #ff3e1d !important; /* Red border for invalid input */
+}
+
+.fieldError {
+  color: #ff3e1d;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0 0;
+  text-align: left;
+}
+
+.fieldInfo {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0 0;
+  text-align: left;
+}
+
+.fieldErrorGeneral {
+    color: #ff3e1d;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+}
