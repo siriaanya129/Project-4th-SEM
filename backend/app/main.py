@@ -468,3 +468,6 @@ static_test_dir = os.path.join(backend_dir, "static_test")
 if not os.path.exists(static_test_dir):
     os.makedirs(static_test_dir)
 app.mount("/static_test", StaticFiles(directory=static_test_dir), name="static_test")
+
+
+handler = app
