@@ -19,10 +19,6 @@
       "dest": "/backend/app/main.py"
     },
     {
-      "src": "/static_test/(.*)",
-      "dest": "/backend/static_test/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/frontend/build/$1"
     }
