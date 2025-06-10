@@ -35,7 +35,6 @@ const AnalysisModal = ({ isOpen, onClose, quizData }) => {
   const difficultyBreakdown = scoring.difficulty_breakdown || {};
   const typeBreakdown = scoring.type_breakdown || {};
   const topics = scoring.topics_covered || [];
-  const subtopics = scoring.subtopics_covered || [];
 
   // --- START OF NEW CODE TO ADD ---
   // This replaces your simple alert() with the real API call logic.

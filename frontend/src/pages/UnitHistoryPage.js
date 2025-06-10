@@ -16,7 +16,7 @@ const formatTimestamp = (isoString) => {
 
 const UnitHistoryPage = () => {
   // --- This original code is untouched ---
-  const { subjectName, unitName } = useParams();
+  const { unitName } = useParams();
   const [attempts, setAttempts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -50,7 +50,7 @@ const UnitHistoryPage = () => {
     };
 
     fetchAttempts();
-  }, [unitName]);
+  }, [unitName, API_URL]);
 
   const handleCardClick = (attemptData) => {
     setSelectedAttempt(attemptData);

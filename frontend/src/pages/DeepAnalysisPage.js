@@ -44,7 +44,7 @@ const DeepAnalysisPage = () => {
     };
 
     fetchGraphData();
-  }, [timePeriod]);
+  }, [timePeriod, API_URL]);
 
   const handleGeneratePathway = async () => {
     setLoadingPathway(true);

@@ -31,7 +31,7 @@ const StudyMaterialsPage = () => {
       setLoading(false);
     };
     fetchMaterials();
-  }, [subjectName]);
+  }, [subjectName, API_URL]);
 
   return (
     <>

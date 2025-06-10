@@ -37,7 +37,7 @@ const QuizSelectionPage = () => {
     };
 
     fetchAvailability();
-  }, [subjectName]);
+  }, [subjectName, API_URL]);
 
   if (loading) {
     return <div className={styles.pageWrapper}><div className={styles.header}><h2>Loading...</h2></div></div>;

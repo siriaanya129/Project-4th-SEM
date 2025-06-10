@@ -45,7 +45,7 @@ const PerformanceDashboard = () => {
     };
 
     fetchData();
-  }, [timePeriod]);
+  }, [timePeriod, API_URL]);
 
   const renderGridBox = (level, type) => {
     const data = dashboardData?.[level]?.[type];
